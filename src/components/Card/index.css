@@ -1,0 +1,10 @@
+.card > div:not(.card-body) > .table {
+  margin-bottom: 0;
+}
+
+.card > div:not(.card-body) > .table:first-child > thead:first-child > tr:first-child > td,
+.card > div:not(.card-body) > .table:first-child > thead:first-child > tr:first-child > th,
+.card > div:not(.card-body) > .table:first-child > tbody:first-child > tr:first-child > th,
+.card > div:not(.card-body) > .table:first-child > tbody:first-child > tr:first-child > td {
+  border-top: 0;
+}

@@ -1,0 +1,11 @@
+/node_modules
+/coverage
+/build
+/demo/dist
+/es
+/lib
+/umd
+/public
+package.json
+package-lock.json
+README.md

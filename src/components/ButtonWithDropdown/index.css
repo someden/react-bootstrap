@@ -1,0 +1,7 @@
+.dropdown-toggle::after {
+  margin-left: 0.7em;
+}
+.dropdown-toggle-split {
+  padding-right: 0.5625rem;
+  padding-left: 0.5625rem;
+}

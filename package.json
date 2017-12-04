@@ -1,0 +1,140 @@
+{
+  "name": "react-bootstrap",
+  "version": "0.1.0",
+  "description": "React components that uses Bootstrap 4 as a base for styles.",
+  "authors": [
+    "Denis Efremov <kisonic@mail.ru>"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
+  "tags": [
+    "react",
+    "bootstrap"
+  ],
+  "keywords": [
+    "react",
+    "bootstrap"
+  ],
+  "homepage": "https://kisonic.github.io/react-bootstrap/",
+  "repository": {
+    "type": "git",
+    "url": "kisonic/react-bootstrap"
+  },
+  "bugs": {
+    "url": "https://github.com/kisonic/react-bootstrap/issues"
+  },
+  "scripts": {
+    "start": "start-storybook -p 3000 -c stories",
+    "build": "nwb build-react-component --copy-files",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "prettify": "prettier 'src/**/*.js' 'src/**/*.jsx' 'stories/**/*.js' 'stories/**/*.jsx' --write",
+    "lint": "eslint --ext .js,.jsx src/ stories/ --fix",
+    "deploy": "gh-pages -b build -d . -s '{package.json,es/**,lib/**}'",
+    "build-storybook": "build-storybook -c stories -o build/storybook",
+    "deploy-storybook": "gh-pages -d build/storybook",
+    "precommit": "lint-staged",
+    "prepush": "(yarn run build && yarn run deploy) ; (yarn run build-storybook && yarn run deploy-storybook) ; exit 0"
+  },
+  "dependencies": {
+    "moment": "^2.19.3",
+    "prop-types": "^15.6.0",
+    "react-autocomplete": "^1.7.2",
+    "react-style-proptype": "^3.1.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.2.17",
+    "@storybook/addon-info": "^3.2.17",
+    "@storybook/addon-options": "^3.2.17",
+    "@storybook/react": "^3.2.17",
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "gh-pages": "^1.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "nwb": "^0.20.0",
+    "prettier": "^1.8.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0-0",
+    "react-dom": "^16.0.0-0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "node": true,
+      "commonjs": true,
+      "es6": true,
+      "jest": true
+    },
+    "plugins": [
+      "import",
+      "jsx-a11y",
+      "react"
+    ],
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "default-case": "off",
+      "indent": "off",
+      "object-curly-newline": "off",
+      "function-paren-newline": "off",
+      "jsx-quotes": [
+        "error",
+        "prefer-single"
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "**/stories/**/*.*"
+          ]
+        }
+      ],
+      "react/sort-comp": [
+        "off"
+      ],
+      "react/no-array-index-key": "off",
+      "max-len": "off"
+    }
+  },
+  "eslintIgnore": [
+    "/coverage/*",
+    "/build/*",
+    "/demo/dist/*",
+    "/es/*",
+    "/lib/*",
+    "/umd/*",
+    "/public/*"
+  ],
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "trailingComma": "es5"
+  },
+  "lint-staged": {
+    "{src,stories}/**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}

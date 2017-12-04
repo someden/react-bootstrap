@@ -1,0 +1,33 @@
+.list-group-item-toggle,
+.list-group-item-toggle ~ .list-group-item {
+  padding-left: 2.5rem;
+}
+
+.list-group-item > .list-group {
+  margin: .75rem calc(-1.25rem - 1px) calc(-.75rem - 1px) 0;
+}
+
+.list-group-item > .list-group.list-group-flush {
+  margin: .75rem -1.25rem -.75rem 0;
+}
+
+.list-group-item > .list-group > .list-group-item {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.list-group-item > .list-group-flush > .list-group-item:first-child {
+  border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.card > div:not(.card-body):last-child .list-group-flush:last-child > .list-group-item:last-child {
+  border-bottom-right-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+}
+
+.list-group-item:not(:last-child) .list-group > .list-group-item:last-child {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
