@@ -35,3 +35,9 @@ Add to `package.json`:
 - `yarn run build` will build the component for publishing to npm and also bundle the demo app.
 
 - `yarn run clean` will delete built resources.
+
+## TODO
+
+- Do something with hardcoded colors in `.list-group` and `.popup-body`
+
+- Do something with hardcoded margins and paddings in `ButtonWithDropdown`

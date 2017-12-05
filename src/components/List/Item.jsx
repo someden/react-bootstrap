@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -12,49 +11,38 @@ const Item = ({
   active,
   disabled,
   className,
-  style,
   onClick,
   onToggle,
   toggleIconName,
   controls,
   children,
+  ...props
 }) => (
   <li
+    {...props}
     className={`
       list-group-item
       ${color ? `list-group-item-${color}` : ''}
       ${onClick ? 'list-group-item-action' : ''}
-      ${onToggle ? 'list-group-item-toggle' : ''}
+      ${onToggle ? 'toggled' : ''}
       ${active ? 'active' : ''}
       ${disabled ? 'disabled' : ''}
       ${className}
     `}
-    {...(onClick
-      ? {
-          style: { cursor: 'pointer', ...style },
-          role: 'presentation',
-          onClick,
-        }
-      : { style })}
+    {...(onClick ? { role: 'presentation', onClick } : {})}
   >
     {onToggle ? (
       <Button
-        color='link'
-        style={{
-          position: 'absolute',
-          left: '.6rem',
-          padding: 0,
-          width: '1.5rem',
-          height: '1.5rem',
-        }}
+        color={active ? 'primary' : 'link'}
         disabled={disabled}
+        className='list-group-item-toggle'
         onClick={onToggle}
       >
         <Icon name={toggleIconName} />
       </Button>
     ) : null}
     {controls ? (
-      <div className='pull-right' style={{ margin: '-6px 0' }}>
+      <div className='pull-right' style={{ margin: '-.45rem 0' }}>
         {controls}
       </div>
     ) : null}
@@ -67,7 +55,6 @@ Item.propTypes = {
   active: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
-  style: stylePropType,
   onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   onToggle: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
   toggleIconName: PropTypes.string,
@@ -80,7 +67,6 @@ Item.defaultProps = {
   active: false,
   disabled: false,
   className: '',
-  style: {},
   onClick: false,
   onToggle: false,
   toggleIconName: 'plus',

@@ -92,7 +92,7 @@ storiesOf('List', module).add('List', () => (
             </List.Item>
           ))}
           <List.Item>List Item 6</List.Item>
-          <List.Item onToggle={action('onClick List Item Toggle')} toggleIconName='plus'>
+          <List.Item active onToggle={action('onClick List Item Toggle')} toggleIconName='plus'>
             List Item 7
           </List.Item>
         </List>
@@ -123,7 +123,7 @@ storiesOf('List', module).add('List', () => (
 
               <List.Item>Sub List Item 6</List.Item>
 
-              <List.Item onToggle={action('onClick List Item Toggle')} toggleIconName='plus'>
+              <List.Item active onToggle={action('onClick List Item Toggle')} toggleIconName='plus'>
                 Sub List Item 7
                 <List>
                   {list.map(item => (

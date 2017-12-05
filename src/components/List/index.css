@@ -1,14 +1,27 @@
-.list-group-item-toggle,
-.list-group-item-toggle ~ .list-group-item {
+.list-group {
+  color: #212529;
+}
+
+.list-group-item.toggled,
+.list-group-item.toggled ~ .list-group-item {
   padding-left: 2.5rem;
 }
 
+.list-group-item-toggle {
+  position: absolute;
+  left: 0.6rem;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0;
+}
+
 .list-group-item > .list-group {
-  margin: .75rem calc(-1.25rem - 1px) calc(-.75rem - 1px) 0;
+  margin: 0.75rem calc(-1.25rem - 1px) calc(-0.75rem - 1px) 0;
 }
 
 .list-group-item > .list-group.list-group-flush {
-  margin: .75rem -1.25rem -.75rem 0;
+  margin: 0.75rem -1.25rem -0.75rem 0;
 }
 
 .list-group-item > .list-group > .list-group-item {
@@ -19,12 +32,12 @@
 }
 
 .list-group-item > .list-group-flush > .list-group-item:first-child {
-  border-top: 1px solid rgba(0,0,0,.125);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .card > div:not(.card-body):last-child .list-group-flush:last-child > .list-group-item:last-child {
-  border-bottom-right-radius: .25rem;
-  border-bottom-left-radius: .25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
 }
 
 .list-group-item:not(:last-child) .list-group > .list-group-item:last-child {
