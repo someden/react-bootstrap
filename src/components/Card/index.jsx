@@ -70,12 +70,14 @@ class Card extends Component {
       className,
       style,
       children,
+      ...props
     } = this.props;
 
     const showBodyAndFooter = closed === null ? this.state.showBodyAndFooter : !closed;
 
     return (
       <Container
+        {...props}
         className={`
           ${color ? `bg-${color}` : ''}
           ${color && color !== 'light' && color !== 'warning' ? ' text-white' : ''}
@@ -122,7 +124,10 @@ class Card extends Component {
 
         <Body
           custom={customBody}
-          className={showBodyAndFooter ? '' : 'd-none'}
+          className={`
+            ${showBodyAndFooter ? '' : 'd-none'}
+            ${fullHeight && !footer ? 'rounded-bottom' : ''}
+          `}
           style={
             fullHeight
               ? {

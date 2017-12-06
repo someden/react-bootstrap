@@ -1,22 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 
-const Footer = ({ className, style, children }) => (
-  <div className={`card-footer ${className}`} style={style}>
+const Footer = ({ className, children, ...props }) => (
+  <div {...props} className={`card-footer ${className}`}>
     {children}
   </div>
 );
 
 Footer.propTypes = {
   className: PropTypes.string,
-  style: stylePropType,
   children: PropTypes.node,
 };
 
 Footer.defaultProps = {
   className: '',
-  style: {},
   children: null,
 };
 
