@@ -7,7 +7,7 @@ const BootstrapAutocomplete = props => (
     wrapperProps={{ className: 'dropdown' }}
     wrapperStyle={{}}
     renderInput={({ className = '', size = 'md', ...inputProps }) => (
-      <input {...inputProps} className={`form-control  form-control-${size} ${className}`} />
+      <input {...inputProps} className={`form-control form-control-${size} ${className}`} />
     )}
     renderMenu={items => (
       <div className={`dropdown-menu ${items.length ? 'show' : ''}`}>{items}</div>
