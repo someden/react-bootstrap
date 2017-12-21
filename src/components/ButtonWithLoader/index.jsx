@@ -12,6 +12,7 @@ class ButtonWithLoader extends Component {
     disabled: PropTypes.bool,
     messageOnLoading: PropTypes.node,
     messageOnLoaded: PropTypes.node,
+    messageOnError: PropTypes.node,
     onClick: PropTypes.func,
     onLoaded: PropTypes.func,
     children: PropTypes.node,
@@ -20,8 +21,9 @@ class ButtonWithLoader extends Component {
   static defaultProps = {
     color: 'primary',
     disabled: false,
-    messageOnLoading: null,
-    messageOnLoaded: null,
+    messageOnLoading: <Icon name='spinner' pulse fixedWidth />,
+    messageOnLoaded: <Icon name='check' fixedWidth />,
+    messageOnError: <Icon name='exclamation-triangle' fixedWidth />,
     onClick: () => {},
     onLoaded: () => {},
     children: null,
@@ -75,6 +77,7 @@ class ButtonWithLoader extends Component {
       disabled,
       messageOnLoading,
       messageOnLoaded,
+      messageOnError,
       children,
       onClick,
       onLoaded,
@@ -89,21 +92,9 @@ class ButtonWithLoader extends Component {
         disabled={disabled || loading}
         onClick={this.handleLoad}
       >
-        {error ? (
-          <span className='text-white'>
-            <Icon name='exclamation-triangle' fixedWidth /> {String(error)}
-          </span>
-        ) : null}
-        {loading && !error ? (
-          <span>
-            <Icon name='spinner' pulse fixedWidth /> {messageOnLoading}
-          </span>
-        ) : null}
-        {loaded && !error ? (
-          <span>
-            <Icon name='check' fixedWidth /> {messageOnLoaded}
-          </span>
-        ) : null}
+        {error ? <span className='text-white'>{messageOnError}</span> : null}
+        {loading && !error ? messageOnLoading : null}
+        {loaded && !error ? messageOnLoaded : null}
         {!loading && !loaded && !error ? children : null}
       </Button>
     );

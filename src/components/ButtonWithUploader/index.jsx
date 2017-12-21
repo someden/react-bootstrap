@@ -17,6 +17,7 @@ class ButtonWithUploader extends Component {
     style: stylePropType,
     messageOnUploading: PropTypes.node,
     messageOnUploaded: PropTypes.node,
+    messageOnError: PropTypes.node,
     onUpload: PropTypes.func.isRequired,
     onUploaded: PropTypes.func,
     children: PropTypes.node,
@@ -29,8 +30,9 @@ class ButtonWithUploader extends Component {
     disabled: false,
     className: '',
     style: {},
-    messageOnUploading: null,
-    messageOnUploaded: null,
+    messageOnUploading: <Icon name='spinner' pulse fixedWidth />,
+    messageOnUploaded: <Icon name='check' fixedWidth />,
+    messageOnError: <Icon name='exclamation-triangle' fixedWidth />,
     onUploaded: () => {},
     children: null,
   };
@@ -100,6 +102,7 @@ class ButtonWithUploader extends Component {
       style,
       messageOnUploading,
       messageOnUploaded,
+      messageOnError,
       children,
     } = this.props;
     const { uploading, uploaded, error } = this.state;
@@ -115,21 +118,9 @@ class ButtonWithUploader extends Component {
         style={style}
         onChange={this.selectFile}
       >
-        {error ? (
-          <span className='text-white'>
-            <Icon name='exclamation-triangle' fixedWidth /> {String(error)}
-          </span>
-        ) : null}
-        {uploading && !error ? (
-          <span>
-            <Icon name='spinner' pulse fixedWidth /> {messageOnUploading}
-          </span>
-        ) : null}
-        {uploaded && !error ? (
-          <span>
-            <Icon name='check' fixedWidth /> {messageOnUploaded}
-          </span>
-        ) : null}
+        {error ? <span className='text-white'>{messageOnError}</span> : null}
+        {uploading && !error ? messageOnUploading : null}
+        {uploaded && !error ? messageOnUploaded : null}
         {!uploading && !uploaded && !error ? children : null}
       </Input.File>
     );
