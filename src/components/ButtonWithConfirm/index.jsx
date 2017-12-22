@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import ButtonWithLoader from '../ButtonWithLoader';
-import Popup from '../Popup';
+import PopupWithCard from '../PopupWithCard';
 
 class ButtonWithConfirm extends Component {
   static propTypes = {
@@ -62,30 +62,28 @@ class ButtonWithConfirm extends Component {
     } = this.props;
     const { showConfirmPopup } = this.state;
 
-    return (
-      <span>
-        <Button {...props} onClick={this.handleClick} />
-        {showConfirmPopup ? (
-          <Popup
-            width='400px'
-            footer={
-              <div>
-                <ButtonWithLoader color={confirmButtonColor} onClick={this.handleConfirm}>
-                  {confirmButtonText}
-                </ButtonWithLoader>
-                <Button color='light' className='ml-1' onClick={this.toggleConfirmPopup}>
-                  {cancelButtonText}
-                </Button>
-              </div>
-            }
-            className='text-left'
-            onClose={this.toggleConfirmPopup}
-          >
-            {confirmMessage}
-          </Popup>
-        ) : null}
-      </span>
-    );
+    return [
+      <Button key='button' {...props} onClick={this.handleClick} />,
+      showConfirmPopup ? (
+        <PopupWithCard
+          key='popup'
+          footer={
+            <div>
+              <ButtonWithLoader color={confirmButtonColor} onClick={this.handleConfirm}>
+                {confirmButtonText}
+              </ButtonWithLoader>
+              <Button color='light' className='ml-1' onClick={this.toggleConfirmPopup}>
+                {cancelButtonText}
+              </Button>
+            </div>
+          }
+          className='text-left'
+          onClose={this.toggleConfirmPopup}
+        >
+          {confirmMessage}
+        </PopupWithCard>
+      ) : null,
+    ];
   }
 }
 

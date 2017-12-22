@@ -12,6 +12,7 @@ import Input from './components/Input';
 import List from './components/List';
 import Loader from './components/Loader';
 import Popup from './components/Popup';
+import PopupWithCard from './components/PopupWithCard';
 import Select from './components/Select';
 import Spinner from './components/Spinner';
 import Tabs from './components/Tabs';
@@ -31,6 +32,7 @@ export {
   List,
   Loader,
   Popup,
+  PopupWithCard,
   Select,
   Spinner,
   Tabs,
