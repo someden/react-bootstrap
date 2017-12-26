@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Autocomplete from './Autocomplete';
@@ -19,27 +19,35 @@ const unstyledInputTypes = [
   'range',
 ];
 
-const Input = ({ size, className, ...props }) => (
-  <input
-    {...props}
-    className={`
-      ${unstyledInputTypes.includes(props.type) ? '' : `form-control form-control-${size}`}
-      ${className}
-    `}
-  />
-);
+// Class based component instead stateless functional, because refs needed.
+// eslint-disable-next-line react/prefer-stateless-function
+class Input extends Component {
+  static propTypes = {
+    type: PropTypes.string,
+    size: PropTypes.oneOf(sizes),
+    className: PropTypes.string,
+  };
 
-Input.propTypes = {
-  type: PropTypes.string,
-  size: PropTypes.oneOf(sizes),
-  className: PropTypes.string,
-};
+  static defaultProps = {
+    type: 'text',
+    size: 'md',
+    className: '',
+  };
 
-Input.defaultProps = {
-  type: 'text',
-  size: 'md',
-  className: '',
-};
+  render() {
+    const { size, className, ...props } = this.props;
+
+    return (
+      <input
+        {...props}
+        className={`
+          ${unstyledInputTypes.includes(props.type) ? '' : `form-control form-control-${size}`}
+          ${className}
+        `}
+      />
+    );
+  }
+}
 
 Input.Autocomplete = Autocomplete;
 Input.File = File;
