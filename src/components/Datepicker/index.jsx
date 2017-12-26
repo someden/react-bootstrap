@@ -217,7 +217,10 @@ class Datepicker extends Component {
             )}
           </span>
         </div>
-        <div className={`position-absolute mt-1 ${isShowCalendar ? '' : 'd-none'}`}>
+        <div
+          className={`position-absolute mt-1 ${isShowCalendar ? '' : 'd-none'}`}
+          style={{ zIndex: 4 }}
+        >
           <Calendar
             date={moment(date, format).isValid() ? moment(date, format) : ''}
             minDate={getDate(minDate, format)}
