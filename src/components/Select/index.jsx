@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 
 import sizes from '../../utils/sizes';
 
-const Select = ({ items, size, className, ...props }) => (
+const Select = ({ items, size, className, children, ...props }) => (
   <select {...props} className={`custom-select form-control-${size} ${className}`}>
-    {items.map(({ value = '', name = '', disabled = false }, index) => (
-      <option key={index} value={value} disabled={disabled}>
-        {name}
-      </option>
-    ))}
+    {children ||
+      items.map(({ value = '', name = '', disabled = false }, index) => (
+        <option key={index} value={value} disabled={disabled}>
+          {name}
+        </option>
+      ))}
   </select>
 );
 
@@ -23,12 +24,14 @@ Select.propTypes = {
   ),
   size: PropTypes.oneOf(sizes),
   className: PropTypes.string,
+  children: PropTypes.node,
 };
 
 Select.defaultProps = {
   items: [],
   size: 'md',
   className: '',
+  children: null,
 };
 
 export default Select;
