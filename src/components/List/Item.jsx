@@ -17,7 +17,6 @@ class Item extends Component {
     onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     onToggle: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     toggleIconName: PropTypes.string,
-    controls: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     children: PropTypes.node,
   };
 
@@ -29,7 +28,6 @@ class Item extends Component {
     onClick: false,
     onToggle: false,
     toggleIconName: 'plus',
-    controls: '',
     children: null,
   };
 
@@ -42,7 +40,6 @@ class Item extends Component {
       onClick,
       onToggle,
       toggleIconName,
-      controls,
       children,
       ...props
     } = this.props;
@@ -66,11 +63,6 @@ class Item extends Component {
           >
             <Icon name={toggleIconName} />
           </Button>
-        ) : null}
-        {controls ? (
-          <div className='pull-right' style={{ margin: '-.45rem 0' }}>
-            {controls}
-          </div>
         ) : null}
         {children}
       </li>

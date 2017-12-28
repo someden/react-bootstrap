@@ -55,19 +55,15 @@ storiesOf('List', module).add('List', () => (
         <h3 className='mb-4'>List item with controls</h3>
         <List>
           {list.map(item => (
-            <List.Item
-              key={item}
-              controls={
-                <span>
-                  <Button color='light' className='mr-1' onClick={action('onClick Button Ok')}>
-                    <Icon name='pencil' fixedWidth className='text-primary' />
-                  </Button>
-                  <Button color='light' onClick={action('onClick Button Ok')}>
-                    <Icon name='close' fixedWidth className='text-danger' />
-                  </Button>
-                </span>
-              }
-            >
+            <List.Item key={item}>
+              <div className='pull-right' style={{ margin: '-.45rem 0' }}>
+                <Button color='light' className='mr-1' onClick={action('onClick Button Ok')}>
+                  <Icon name='pencil' fixedWidth className='text-primary' />
+                </Button>
+                <Button color='light' onClick={action('onClick Button Ok')}>
+                  <Icon name='close' fixedWidth className='text-danger' />
+                </Button>
+              </div>
               {item}
             </List.Item>
           ))}
