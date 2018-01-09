@@ -43,6 +43,7 @@
     "prepush": "(yarn run build && yarn run deploy) ; (yarn run build-storybook && yarn run deploy-storybook) ; exit 0"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "moment": "^2.19.3",
     "prop-types": "^15.6.0",
     "react-autocomplete": "^1.7.2",
