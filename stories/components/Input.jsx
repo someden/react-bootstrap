@@ -148,23 +148,27 @@ storiesOf('Input', module)
     <div className='row'>
       <div className='col'>
         <Input.Group>
-          <Form.Label htmlFor='username' className='input-group-addon'>
-            @
-          </Form.Label>
+          <div className='input-group-prepend'>
+            <span className='input-group-text'>@</span>
+          </div>
           <Input id='username' placeholder='Username' onChange={action('onChange')} />
         </Input.Group>
       </div>
       <div className='col'>
         <Input.Group>
-          <span className='input-group-addon'>$</span>
+          <div className='input-group-prepend'>
+            <span className='input-group-text'>$</span>
+          </div>
           <Input onChange={action('onChange')} />
-          <span className='input-group-addon'>.00</span>
+          <div className='input-group-append'>
+            <span className='input-group-text'>.00</span>
+          </div>
         </Input.Group>
       </div>
       <div className='col'>
         <Input.Group>
           <Input placeholder='Search...' onChange={action('onChange')} />
-          <span className='input-group-btn'>
+          <span className='input-group-append'>
             <Button>
               <Icon name='search' />
             </Button>
