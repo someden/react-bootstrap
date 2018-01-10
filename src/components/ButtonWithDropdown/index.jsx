@@ -4,8 +4,6 @@ import cn from 'classnames';
 
 import Button from '../Button';
 
-import './index.css';
-
 class ButtonWithDropdown extends Component {
   static propTypes = {
     dropdown: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.func]),

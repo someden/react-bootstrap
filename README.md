@@ -39,5 +39,3 @@ Add to `package.json`:
 ## TODO
 
 - Do something with hardcoded colors in `.list-group` and `.popup-body`
-
-- Do something with hardcoded margins and paddings in `ButtonWithDropdown`
