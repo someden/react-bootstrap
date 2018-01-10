@@ -9,15 +9,15 @@ import colors from '../../src/utils/colors';
 
 const handleUpload = (formData, error = false) =>
   new Promise((resolve, reject) => {
-    action('Uploading')(formData.get('file').name);
+    action('Uploading')(formData.get ? formData.get('file').name : '');
 
     setTimeout(() => {
       if (error) {
         reject(new Error('Some error'));
-        action('Error on upload')(formData.get('file').name);
+        action('Error on upload')(formData.get ? formData.get('file').name : '');
       } else {
         resolve();
-        action('Uploaded')(formData.get('file').name);
+        action('Uploaded')(formData.get ? formData.get('file').name : '');
       }
     }, 3000);
   });
