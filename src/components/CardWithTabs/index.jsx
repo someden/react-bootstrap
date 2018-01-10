@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Children, cloneElement } from 'react';
 
 import Card from '../Card';
 import Tabs from '../Tabs';
@@ -12,48 +12,46 @@ class CardWithTabs extends Component {
     ...Tabs.defaultProps,
   };
 
+  static Item = Tabs.Item;
+
   state = {
-    activeTabIndex: this.props.defaultActiveTabIndex,
+    selectedIndex: this.props.defaultIndex,
   };
 
-  onToggle = activeTabIndex =>
+  onToggle = selectedIndex =>
     this.setState(
       {
-        activeTabIndex,
+        selectedIndex,
       },
-      () => this.props.onToggle(activeTabIndex)
+      () => this.props.onToggle(selectedIndex)
     );
 
   render() {
     const { children } = this.props;
-    const { activeTabIndex } = this.state;
+    const { selectedIndex } = this.state;
 
     return (
       <Card.Container>
         <Card.Header>
           <Tabs.Nav className='card-header-tabs'>
-            {children &&
-              children.map(({ props: { title } }, index) => (
-                <Tabs.NavItem
-                  key={index}
-                  title={title}
-                  active={activeTabIndex === index}
-                  onClick={() => this.onToggle(index)}
-                />
-              ))}
+            {Children.map(children, ({ props: { title } }, index) => (
+              <Tabs.NavItem
+                key={index}
+                title={title}
+                active={selectedIndex === index}
+                onClick={() => this.onToggle(index)}
+              />
+            ))}
           </Tabs.Nav>
         </Card.Header>
         <Card.Body>
-          {children &&
-            children.map((item, index) =>
-              React.cloneElement(item, { key: index, active: activeTabIndex === index })
-            )}
+          {Children.map(children, (item, index) =>
+            cloneElement(item, { key: index, active: selectedIndex === index })
+          )}
         </Card.Body>
       </Card.Container>
     );
   }
 }
-
-CardWithTabs.Item = Tabs.Item;
 
 export default CardWithTabs;

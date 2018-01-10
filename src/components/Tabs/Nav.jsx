@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
+import cn from 'classnames';
 
-const Nav = ({ className, styles, children }) => (
-  <ul className={`nav nav-tabs ${className}`} style={styles}>
+const Nav = ({ className, children, ...props }) => (
+  <ul {...props} className={cn('nav', 'nav-tabs', className)}>
     {children}
   </ul>
 );
 
 Nav.propTypes = {
   className: PropTypes.string,
-  styles: stylePropType,
   children: PropTypes.node.isRequired,
 };
 
 Nav.defaultProps = {
   className: '',
-  styles: {},
 };
 
 export default Nav;

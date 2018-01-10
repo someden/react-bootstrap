@@ -27,7 +27,14 @@ const items = [
 
 storiesOf('Tabs', module).add('Tabs', () => (
   <div className='row'>
-    <div className='col-4'>
+    <div className='col'>
+      <Tabs>
+        <Tabs.Item title={items[0].name} className='p-3 border border-top-0 rounded-bottom'>
+          {items[0].description}
+        </Tabs.Item>
+      </Tabs>
+    </div>
+    <div className='col'>
       <Tabs>
         {items.map(({ name, description }) => (
           <Tabs.Item key={name} title={name} className='p-3 border border-top-0 rounded-bottom'>
@@ -36,7 +43,7 @@ storiesOf('Tabs', module).add('Tabs', () => (
         ))}
       </Tabs>
     </div>
-    <div className='col-4'>
+    <div className='col'>
       <Tabs>
         {items.map(({ name, icon, description }) => (
           <Tabs.Item

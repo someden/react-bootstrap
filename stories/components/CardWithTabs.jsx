@@ -29,6 +29,11 @@ storiesOf('Card with tabs', module).add('Card with tabs', () => (
   <div className='row'>
     <div className='col'>
       <CardWithTabs>
+        <CardWithTabs.Item title={items[0].name}>{items[0].description}</CardWithTabs.Item>
+      </CardWithTabs>
+    </div>
+    <div className='col'>
+      <CardWithTabs>
         {items.map(({ name, description }) => (
           <CardWithTabs.Item key={name} title={name}>
             {description}
