@@ -174,10 +174,7 @@ class Datepicker extends Component {
 
     return (
       <div
-        className={`
-          position-relative
-          ${className}
-        `}
+        className={`position-relative ${className}`}
         ref={(ref) => {
           this.datepicker = ref;
         }}
@@ -190,14 +187,11 @@ class Datepicker extends Component {
             placeholder={placeholder}
             disabled={disabled}
             value={date}
-            className={`
-              form-control
-              form-control-${size}
-            `}
+            className={`form-control form-control-${size}`}
             onChange={this.handleChangeDate}
             onFocus={this.handleShowCalendar}
           />
-          <span className='input-group-btn'>
+          <span className='input-group-append'>
             {date ? (
               <button
                 disabled={disabled}
