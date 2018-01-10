@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
@@ -7,12 +8,13 @@ import sizes from '../../utils/sizes';
 const Link = ({ outline, color, size, disabled, className, children, ...props }) => (
   <a
     {...props}
-    className={`
-      btn btn${outline ? '-outline' : ''}-${color}
-      btn-${size}
-      ${disabled ? 'disabled' : ''}
-      ${className}
-    `}
+    className={cn(
+      'btn',
+      `btn-${size}`,
+      `btn${outline ? '-outline' : ''}-${color}`,
+      { disabled },
+      className
+    )}
   >
     {children}
   </a>

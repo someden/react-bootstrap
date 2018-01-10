@@ -1,31 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import stylePropType from 'react-style-proptype';
+import cn from 'classnames';
 
 import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
 
-const File = ({
-  id,
-  name,
-  color,
-  outline,
-  size,
-  disabled,
-  className,
-  style,
-  onChange,
-  children,
-}) => (
+const File = ({ id, color, outline, size, disabled, className, style, children, ...props }) => (
   <label
     htmlFor={id}
-    className={`
-      btn
-      btn${outline ? '-outline' : ''}-${color}
-      btn-${size}
-      ${disabled ? 'disabled' : ''}
-      ${className}
-    `}
+    className={cn(
+      'btn',
+      `btn-${size}`,
+      `btn${outline ? '-outline' : ''}-${color}`,
+      { disabled },
+      className
+    )}
     style={{
       position: 'relative',
       marginBottom: 0,
@@ -35,8 +25,8 @@ const File = ({
   >
     {children}
     <input
+      {...props}
       id={id}
-      name={name}
       type='file'
       style={{
         position: 'absolute',
@@ -47,33 +37,28 @@ const File = ({
         opacity: 0,
       }}
       disabled={disabled}
-      onChange={onChange}
     />
   </label>
 );
 
 File.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string,
   color: PropTypes.oneOf(buttonColors),
   outline: PropTypes.bool,
   size: PropTypes.oneOf(sizes),
   disabled: PropTypes.bool,
   className: PropTypes.string,
   style: stylePropType,
-  onChange: PropTypes.func,
   children: PropTypes.node,
 };
 
 File.defaultProps = {
-  name: '',
   color: 'primary',
   outline: false,
   size: 'md',
   disabled: false,
   className: '',
   style: {},
-  onChange: () => {},
   children: null,
 };
 

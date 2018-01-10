@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import stylePropType from 'react-style-proptype';
+import cn from 'classnames';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -45,6 +46,11 @@ class Card extends Component {
     children: null,
   };
 
+  static Container = Container;
+  static Header = Header;
+  static Body = Body;
+  static Footer = Footer;
+
   state = {
     showBodyAndFooter: true,
   };
@@ -78,11 +84,13 @@ class Card extends Component {
     return (
       <Container
         {...props}
-        className={`
-          ${color ? `bg-${color}` : ''}
-          ${color && color !== 'light' && color !== 'warning' ? ' text-white' : ''}
-          ${className}
-        `}
+        className={cn(
+          {
+            [`bg-${color}`]: color,
+            'text-white': color && color !== 'light' && color !== 'warning',
+          },
+          className
+        )}
         style={
           fullHeight
             ? {
@@ -124,10 +132,10 @@ class Card extends Component {
 
         <Body
           custom={customBody}
-          className={`
-            ${showBodyAndFooter ? '' : 'd-none'}
-            ${fullHeight && !footer ? 'rounded-bottom' : ''}
-          `}
+          className={cn({
+            'd-none': !showBodyAndFooter,
+            'rounded-bottom': fullHeight && !footer,
+          })}
           style={
             fullHeight
               ? {
@@ -140,15 +148,10 @@ class Card extends Component {
           {children}
         </Body>
 
-        {footer ? <Footer className={showBodyAndFooter ? '' : 'd-none'}>{footer}</Footer> : null}
+        {footer ? <Footer className={cn({ 'd-none': !showBodyAndFooter })}>{footer}</Footer> : null}
       </Container>
     );
   }
 }
-
-Card.Container = Container;
-Card.Header = Header;
-Card.Body = Body;
-Card.Footer = Footer;
 
 export default Card;

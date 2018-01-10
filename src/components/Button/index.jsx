@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import Group from './Group';
 import Link from './Link';
@@ -10,7 +11,7 @@ import sizes from '../../utils/sizes';
 const Button = ({ outline, color, size, className, children, ...props }) => (
   <button
     {...props}
-    className={`btn btn${outline ? '-outline' : ''}-${color} btn-${size} ${className}`}
+    className={cn('btn', `btn-${size}`, `btn${outline ? '-outline' : ''}-${color}`, className)}
   >
     {children}
   </button>

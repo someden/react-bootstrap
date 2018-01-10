@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import Button from '../Button';
 
@@ -47,37 +48,26 @@ class ButtonWithDropdown extends Component {
   handleClick = e => this.dropdown && !this.dropdown.contains(e.target) && this.toggleDropdown();
 
   render() {
-    const { dropdown, className, children, onClick, onToggle, ...props } = this.props;
+    const { dropdown, className, onClick, onToggle, children, ...props } = this.props;
     const { showDropdown } = this.state;
 
     return (
       <Button.Group className={className}>
         <Button
           {...props}
-          className={`dropdown-toggle ${children ? '' : 'dropdown-toggle-split'}`}
+          className={cn('dropdown-toggle', { 'dropdown-toggle-split': !children })}
           onClick={this.onToggle}
         >
           {children}
         </Button>
-        {typeof dropdown === 'function' ? (
-          <div
-            className={`dropdown-menu ${showDropdown ? 'show' : ''}`}
-            ref={(node) => {
-              this.dropdown = node;
-            }}
-          >
-            {dropdown(this.toggleDropdown)}
-          </div>
-        ) : (
-          <div
-            className={`dropdown-menu ${showDropdown ? 'show' : ''}`}
-            ref={(node) => {
-              this.dropdown = node;
-            }}
-          >
-            {dropdown}
-          </div>
-        )}
+        <div
+          className={cn('dropdown-menu', { show: showDropdown })}
+          ref={(node) => {
+            this.dropdown = node;
+          }}
+        >
+          {typeof dropdown === 'function' ? dropdown(this.toggleDropdown) : dropdown}
+        </div>
       </Button.Group>
     );
   }

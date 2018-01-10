@@ -1,22 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
+import cn from 'classnames';
 
 import iconSizes from '../../utils/iconSizes';
 
-const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, className, style }) => (
+const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, className, ...props }) => (
   <i
-    className={`
-      fa
-      fa-${name}
-      ${size ? `fa-${size}` : ''}
-      ${rotate ? `fa-rotate-${rotate}` : ''}
-      ${fixedWidth ? 'fa-fw' : ''}
-      ${spin ? 'fa-spin' : ''}
-      ${pulse ? 'fa-pulse' : ''}
-      ${className}
-    `}
-    style={style}
+    {...props}
+    className={cn(
+      'fa',
+      `fa-${name}`,
+      {
+        'fa-fw': fixedWidth,
+        'fa-spin': spin,
+        'fa-pulse': pulse,
+        [`fa-${size}`]: size,
+        [`fa-rotate-${rotate}`]: rotate,
+      },
+      className
+    )}
   />
 );
 
@@ -28,7 +30,6 @@ Icon.propTypes = {
   spin: PropTypes.bool,
   pulse: PropTypes.bool,
   className: PropTypes.string,
-  style: stylePropType,
 };
 
 Icon.defaultProps = {
@@ -39,7 +40,6 @@ Icon.defaultProps = {
   spin: false,
   pulse: false,
   className: '',
-  style: {},
 };
 
 export default Icon;

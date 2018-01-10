@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import Button from '../Button';
 import Icon from '../Icon';
@@ -47,11 +48,17 @@ class Item extends Component {
     return (
       <li
         {...props}
-        className={`list-group-item ${color ? `list-group-item-${color}` : ''} ${
-          onClick ? 'list-group-item-action' : ''
-        } ${onToggle ? 'toggled' : ''} ${active ? 'active' : ''} ${disabled ? 'disabled' : ''} ${
+        className={cn(
+          'list-group-item',
+          {
+            [`list-group-item-${color}`]: color,
+            'list-group-item-action': onClick,
+            toggled: onToggle,
+            active,
+            disabled,
+          },
           className
-        }`}
+        )}
         {...(onClick ? { role: 'presentation', onClick } : {})}
       >
         {onToggle ? (

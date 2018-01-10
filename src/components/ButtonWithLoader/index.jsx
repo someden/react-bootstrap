@@ -78,9 +78,9 @@ class ButtonWithLoader extends Component {
       messageOnLoading,
       messageOnLoaded,
       messageOnError,
-      children,
       onClick,
       onLoaded,
+      children,
       ...props
     } = this.props;
     const { loading, loaded, error } = this.state;

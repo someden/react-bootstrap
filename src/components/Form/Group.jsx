@@ -1,22 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 
-const Group = ({ className, style, children }) => (
-  <div className={`form-group ${className}`} style={style}>
+const Group = ({ className, children, ...props }) => (
+  <div {...props} className={`form-group ${className}`}>
     {children}
   </div>
 );
 
 Group.propTypes = {
   className: PropTypes.string,
-  style: stylePropType,
   children: PropTypes.node,
 };
 
 Group.defaultProps = {
   className: '',
-  style: {},
   children: null,
 };
 

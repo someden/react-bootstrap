@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import stylePropType from 'react-style-proptype';
 
 import Icon from '../Icon';
@@ -8,10 +9,7 @@ import iconSizes from '../../utils/iconSizes';
 
 const Spinner = ({ size, inline, className, style, iconName }) => (
   <span
-    className={`
-      ${inline ? '' : 'p-4'}
-      ${className}
-    `}
+    className={cn({ 'p-4': !inline }, className)}
     style={
       inline
         ? style

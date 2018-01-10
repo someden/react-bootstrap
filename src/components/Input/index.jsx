@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import Autocomplete from './Autocomplete';
 import File from './File';
@@ -34,23 +35,23 @@ class Input extends Component {
     className: '',
   };
 
+  static Autocomplete = Autocomplete;
+  static File = File;
+  static Group = Group;
+
   render() {
     const { size, className, ...props } = this.props;
 
     return (
       <input
         {...props}
-        className={`
-          ${unstyledInputTypes.includes(props.type) ? '' : `form-control form-control-${size}`}
-          ${className}
-        `}
+        className={cn(
+          !unstyledInputTypes.includes(props.type) && `form-control form-control-${size}`,
+          className
+        )}
       />
     );
   }
 }
-
-Input.Autocomplete = Autocomplete;
-Input.File = File;
-Input.Group = Group;
 
 export default Input;

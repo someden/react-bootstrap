@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 
 import Icon from '../Icon';
 import Input from '../Input';
+
+import buttonColors from '../../utils/buttonColors';
 
 class ButtonWithUploader extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    color: Input.File.propTypes.color,
-    outline: PropTypes.bool,
-    size: Input.File.propTypes.size,
-    disabled: PropTypes.bool,
-    className: PropTypes.string,
-    style: stylePropType,
+    color: PropTypes.oneOf(buttonColors),
     messageOnUploading: PropTypes.node,
     messageOnUploaded: PropTypes.node,
     messageOnError: PropTypes.node,
@@ -25,11 +21,6 @@ class ButtonWithUploader extends Component {
 
   static defaultProps = {
     color: 'primary',
-    outline: false,
-    size: 'md',
-    disabled: false,
-    className: '',
-    style: {},
     messageOnUploading: <Icon name='spinner' pulse fixedWidth />,
     messageOnUploaded: <Icon name='check' fixedWidth />,
     messageOnError: <Icon name='exclamation-triangle' fixedWidth />,
@@ -95,27 +86,21 @@ class ButtonWithUploader extends Component {
     const {
       id,
       color,
-      outline,
-      size,
-      disabled,
-      className,
-      style,
       messageOnUploading,
       messageOnUploaded,
       messageOnError,
+      onUpload,
+      onUploaded,
       children,
+      ...props
     } = this.props;
     const { uploading, uploaded, error } = this.state;
 
     return (
       <Input.File
+        {...props}
         id={`upload_${id}`}
         color={error ? 'danger' : color}
-        outline={outline}
-        size={size}
-        disabled={disabled}
-        className={className}
-        style={style}
         onChange={this.selectFile}
       >
         {error ? <span className='text-white'>{messageOnError}</span> : null}
