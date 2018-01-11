@@ -115,7 +115,7 @@ class Card extends Component {
                   : {}
               }
             >
-              {typeof title === 'string' ? <h5 className='mr-auto my-2'>{title}</h5> : title}
+              {typeof title === 'string' ? <h5 className='mr-auto'>{title}</h5> : title}
               {controls}
               {collapsible && !fullHeight ? (
                 <Button
