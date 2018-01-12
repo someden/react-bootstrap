@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import stylePropType from 'react-style-proptype';
 import cn from 'classnames';
 
 import Button from '../Button';
@@ -27,7 +26,6 @@ class Card extends Component {
     footer: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     fullHeight: PropTypes.bool,
     className: PropTypes.string,
-    style: stylePropType,
     children: PropTypes.node,
   };
 
@@ -42,7 +40,6 @@ class Card extends Component {
     footer: null,
     fullHeight: false,
     className: '',
-    style: {},
     children: null,
   };
 
@@ -74,7 +71,6 @@ class Card extends Component {
       footer,
       fullHeight,
       className,
-      style,
       children,
       ...props
     } = this.props;
@@ -86,41 +82,22 @@ class Card extends Component {
         {...props}
         className={cn(
           {
+            'card-on-full-height': fullHeight,
             [`bg-${color}`]: color,
             'text-white': color && color !== 'light' && color !== 'warning',
           },
           className
         )}
-        style={
-          fullHeight
-            ? {
-                display: 'flex',
-                height: '100%',
-                flexDirection: 'column',
-                ...style,
-              }
-            : style
-        }
       >
         {title || controls ? (
           <Header>
-            <div
-              style={
-                controls || (collapsible && !fullHeight)
-                  ? {
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'end',
-                    }
-                  : {}
-              }
-            >
-              {typeof title === 'string' ? <h5 className='mr-auto'>{title}</h5> : title}
-              {controls}
+            <div className='card-header-inner'>
+              {typeof title === 'string' ? <div className='card-header-title'>{title}</div> : title}
+              {typeof controls === 'string' ? <div>{controls}</div> : controls}
               {collapsible && !fullHeight ? (
                 <Button
                   color={color || 'light'}
-                  className='ml-3'
+                  className='card-toggle'
                   onClick={this.toggleBodyAndFooter}
                 >
                   <Icon name={`chevron-${showBodyAndFooter ? 'down' : 'up'}`} />
@@ -134,16 +111,9 @@ class Card extends Component {
           custom={customBody}
           className={cn({
             'd-none': !showBodyAndFooter,
+            'card-body-on-full-height': fullHeight,
             'rounded-bottom': fullHeight && !footer,
           })}
-          style={
-            fullHeight
-              ? {
-                  height: '100%',
-                  overflow: 'auto',
-                }
-              : {}
-          }
         >
           {children}
         </Body>

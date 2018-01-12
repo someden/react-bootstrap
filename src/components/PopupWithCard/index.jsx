@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../Button';
@@ -24,14 +24,8 @@ const PopupWithCard = ({
       collapsible={false}
       controls={
         title || controls ? (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'end',
-            }}
-          >
-            {controls}
+          <Fragment>
+            {typeof controls === 'string' ? <div>{controls}</div> : controls}
             <Button
               color={color || 'light'}
               className='ml-3'
@@ -40,7 +34,7 @@ const PopupWithCard = ({
             >
               <Icon name='close' />
             </Button>
-          </div>
+          </Fragment>
         ) : null
       }
       style={{ width: '550px' }}

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 const Body = ({ custom, className, children, ...props }) => (
-  <div {...props} className={`${custom ? '' : 'card-body'} ${className}`}>
+  <div {...props} className={cn({ 'card-body': !custom }, className)}>
     {children}
   </div>
 );

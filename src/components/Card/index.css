@@ -1,10 +1,31 @@
-.card > div:not(.card-body) > .table {
-  margin-bottom: 0;
+.card-on-full-height {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.card > div:not(.card-body) > .table:first-child > thead:first-child > tr:first-child > td,
-.card > div:not(.card-body) > .table:first-child > thead:first-child > tr:first-child > th,
-.card > div:not(.card-body) > .table:first-child > tbody:first-child > tr:first-child > th,
-.card > div:not(.card-body) > .table:first-child > tbody:first-child > tr:first-child > td {
-  border-top: 0;
+.card-on-full-height .card-header,
+.card-on-full-height .card-footer {
+  flex-shrink: 0;
+}
+
+.card-body-on-full-height {
+  height: 100%;
+  overflow: auto;
+}
+
+.card-header-inner {
+  display: flex;
+  align-items: center;
+}
+
+.card-header-title {
+  margin-right: auto;
+  /* height the same as button */
+  margin-top: calc(0.375rem + 1px); /* button padding top + button border top */
+  margin-bottom: calc(0.375rem + 1px); /* button padding bottom + button border bottom */
+}
+
+.card-toggle {
+  margin-left: 1rem;
 }

@@ -59,7 +59,7 @@ storiesOf('Card', module)
         <div className='col'>
           <Card
             title={
-              <h2 className='mb-0 text-center'>
+              <h2 className='mb-0 mx-auto'>
                 <span className='text-warning'>Super</span> <i className='text-info'>custom</i>{' '}
                 header
               </h2>
@@ -84,7 +84,7 @@ storiesOf('Card', module)
         <div className='col'>
           <Card
             title='With additional text in header'
-            controls={<span className='text-danger'>Some text</span>}
+            controls={<div className='text-danger'>Some text</div>}
             collapsible={false}
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
@@ -96,10 +96,10 @@ storiesOf('Card', module)
           <Card
             title='With labels in header'
             controls={
-              <span>
+              <div>
                 <span className='badge badge-primary mr-1'>Primary</span>
                 <span className='badge badge-success mr-1'>Success</span>
-              </span>
+              </div>
             }
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
@@ -117,14 +117,14 @@ storiesOf('Card', module)
           <Card
             title='Buttons in header'
             controls={
-              <span>
+              <div>
                 <Button color='success' onClick={action('onClick Button')}>
                   <Icon name='plus' fixedWidth /> Add
                 </Button>
                 <Button color='danger' className='ml-1' onClick={action('onClick Button')}>
                   <Icon name='close' fixedWidth /> Delete
                 </Button>
-              </span>
+              </div>
             }
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
@@ -137,7 +137,7 @@ storiesOf('Card', module)
             title='Buttons in header'
             collapsible={false}
             controls={
-              <span>
+              <div>
                 <Button color='success' onClick={action('onClick Button')}>
                   <Icon name='plus' fixedWidth /> Add
                 </Button>
@@ -147,7 +147,7 @@ storiesOf('Card', module)
                 <Button color='light' className='ml-3' onClick={action('onClick Button')}>
                   <Icon name='close' />
                 </Button>
-              </span>
+              </div>
             }
           >
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
@@ -189,7 +189,7 @@ storiesOf('Card', module)
       <div className='row mb-5'>
         <div className='col' style={{ height: '300px' }}>
           <Card
-            title='Full height of the parent'
+            title='On full height'
             footer={
               <div>
                 <Button className='mr-1' onClick={action('onClick Button Ok')}>
@@ -349,13 +349,13 @@ storiesOf('Card', module)
         </div>
         <div className='col'>
           <Card title='Table instead body' customBody>
-            <table className='table'>
+            <table className='table mb-0'>
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th className='border-top-0'>#</th>
+                  <th className='border-top-0'>First Name</th>
+                  <th className='border-top-0'>Last Name</th>
+                  <th className='border-top-0'>Username</th>
                 </tr>
               </thead>
               <tbody>
@@ -383,12 +383,12 @@ storiesOf('Card', module)
         </div>
         <div className='col' style={{ height: '300px' }}>
           <Card title='Table instead body' customBody fullHeight>
-            <table className='table'>
+            <table className='table mb-0'>
               <tbody>
                 <tr>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
+                  <td className='border-top-0'>Mark</td>
+                  <td className='border-top-0'>Otto</td>
+                  <td className='border-top-0'>@mdo</td>
                 </tr>
                 <tr>
                   <td>Jacob</td>
