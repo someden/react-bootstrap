@@ -6,38 +6,23 @@ import cn from 'classnames';
 import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
 
+import './File.css';
+
 const File = ({ id, color, outline, size, disabled, className, style, children, ...props }) => (
   <label
     htmlFor={id}
     className={cn(
       'btn',
+      'btn-file',
       `btn-${size}`,
       `btn${outline ? '-outline' : ''}-${color}`,
       { disabled },
       className
     )}
-    style={{
-      position: 'relative',
-      marginBottom: 0,
-      overflow: 'hidden',
-      ...style,
-    }}
+    style={style}
   >
     {children}
-    <input
-      {...props}
-      id={id}
-      type='file'
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        opacity: 0,
-      }}
-      disabled={disabled}
-    />
+    <input {...props} id={id} type='file' disabled={disabled} />
   </label>
 );
 
