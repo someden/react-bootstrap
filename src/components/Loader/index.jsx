@@ -50,15 +50,19 @@ class Loader extends Component {
       .then(() => !this.isUnmounted && onLoad())
       .then(res => !this.isUnmounted && this.afterLoading(res))
       .then(res => !this.isUnmounted && onLoaded(res))
-      .catch(error => !this.isUnmounted && this.handleError(error));
+      .catch((error) => {
+        if (!this.isUnmounted) {
+          this.setState({ loading: false, error });
+        }
+
+        throw error;
+      });
 
   beforeLoading = () =>
     new Promise(resolve => this.setState({ loading: true, error: false }, resolve));
 
   afterLoading = res =>
     new Promise(resolve => this.setState({ loading: false }, () => resolve(res)));
-
-  handleError = error => this.setState({ loading: false, error });
 
   render() {
     const { loadingIndicator, children } = this.props;

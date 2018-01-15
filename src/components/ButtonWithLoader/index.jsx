@@ -46,7 +46,13 @@ class ButtonWithLoader extends Component {
       .then(() => !this.isUnmounted && this.props.onClick(e))
       .then(res => !this.isUnmounted && this.afterLoading(res))
       .then(res => !this.isUnmounted && this.props.onLoaded(res))
-      .catch(error => !this.isUnmounted && this.handleError(error));
+      .catch((error) => {
+        if (!this.isUnmounted) {
+          this.setState({ loading: false, loaded: false, error });
+        }
+
+        throw error;
+      });
 
   beforeLoading = () =>
     new Promise(resolve => this.setState({ loading: true, loaded: false, error: false }, resolve));
@@ -68,8 +74,6 @@ class ButtonWithLoader extends Component {
           )
       )
     );
-
-  handleError = error => this.setState({ loading: false, loaded: false, error });
 
   render() {
     const {

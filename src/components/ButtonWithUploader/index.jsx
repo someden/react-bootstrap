@@ -57,7 +57,13 @@ class ButtonWithUploader extends Component {
       .then(() => !this.isUnmounted && this.props.onUpload(data))
       .then(res => !this.isUnmounted && this.afterUploading(res))
       .then(res => !this.isUnmounted && this.props.onUploaded(res))
-      .catch(error => !this.isUnmounted && this.handleError(error));
+      .catch((error) => {
+        if (!this.isUnmounted) {
+          this.setState({ uploading: false, uploaded: false, error });
+        }
+
+        throw error;
+      });
 
   beforeUploading = () =>
     new Promise(resolve => this.setState({ uploading: true, error: false }, resolve));
@@ -79,8 +85,6 @@ class ButtonWithUploader extends Component {
           )
       )
     );
-
-  handleError = error => this.setState({ uploading: false, uploaded: false, error });
 
   render() {
     const {
