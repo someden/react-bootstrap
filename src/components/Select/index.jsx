@@ -6,8 +6,8 @@ import sizes from '../../utils/sizes';
 const Select = ({ items, size, className, children, ...props }) => (
   <select {...props} className={`custom-select form-control-${size} ${className}`}>
     {children ||
-      items.map(({ value = '', name = '', disabled = false }, index) => (
-        <option key={index} value={value} disabled={disabled}>
+      items.map(({ id = '', value = '', name = '', disabled = false }, index) => (
+        <option key={index} value={id || value} disabled={disabled}>
           {name}
         </option>
       ))}
@@ -17,8 +17,9 @@ const Select = ({ items, size, className, children, ...props }) => (
 Select.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       disabled: PropTypes.bool,
     })
   ),
