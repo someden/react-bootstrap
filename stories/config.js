@@ -1,7 +1,7 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
-import { withInfo, setDefaults } from '@storybook/addon-info';
+import { withInfo } from '@storybook/addon-info';
 
 addDecorator(story => (
   // eslint-disable-next-line react/react-in-jsx-scope, react/jsx-filename-extension
@@ -83,21 +83,21 @@ setOptions({
 });
 
 // https://github.com/storybooks/storybook/tree/master/addons/info
-setDefaults({
-  header: false, // Toggles display of header with component name and description
-  inline: true, // Displays info inline vs click button to view
-  source: false, // Displays the source of story Component
-  propTables: [
-    /* Components used in story */
-  ], // displays Prop Tables with this components
-  propTablesExclude: [], // Exclude Components from being shoun in Prop Tables section
-  styles: {}, // Overrides styles of addon
-  components: {}, // Overrides components used to display markdown. Warning! This option's name will be likely deprecated in favor to "components" with the same API in 3.3 release. Follow this PR #1501 for details
-  maxPropsIntoLine: 1, // Max props to display per line in source code
-  maxPropObjectKeys: 10,
-  maxPropArrayLength: 10,
-  maxPropStringLength: 100,
-});
+// setDefaults({
+//   header: false, // Toggles display of header with component name and description
+//   inline: true, // Displays info inline vs click button to view
+//   source: false, // Displays the source of story Component
+//   propTables: [
+//     /* Components used in story */
+//   ], // displays Prop Tables with this components
+//   propTablesExclude: [], // Exclude Components from being shown in Prop Tables section. Accepts an array of component classes or functions.
+//   styles: {}, // Overrides styles of addon. The object should follow this shape: https://github.com/storybooks/storybook/blob/master/addons/info/src/components/Story.js#L19. This prop can also accept a function which has the default stylesheet passed as an argument.
+//   components: {}, // Overrides components used to display markdown
+//   maxPropsIntoLine: 1, // Max props to display per line in source code
+//   maxPropObjectKeys: 10, // Displays the first 10 characters of the prop name
+//   maxPropArrayLength: 10, // Displays the first 10 items in the default prop array
+//   maxPropStringLength: 100, // Displays the first 100 characters in the default prop string
+// });
 
 addDecorator((story, context) => withInfo('')(story)(context));
 
