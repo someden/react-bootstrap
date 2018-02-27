@@ -14,14 +14,19 @@ storiesOf('PopupWithCard', module)
     </PopupWithCard>
   ))
   .add('With title', () => (
-    <PopupWithCard title='Title' onClose={action('onClose')}>
+    <PopupWithCard title='Title' style={{ maxWidth: '550px' }} onClose={action('onClose')}>
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut velit, hic magni necessitatibus
       aut beatae molestiae laborum fuga voluptates, modi nisi dicta dolores. At quia dolorem laborum
       animi quo, nostrum?
     </PopupWithCard>
   ))
   .add('With title and additional text in header', () => (
-    <PopupWithCard title='Title' controls='Some additional information' onClose={action('onClose')}>
+    <PopupWithCard
+      title='Title'
+      controls='Some additional information'
+      style={{ maxWidth: '550px' }}
+      onClose={action('onClose')}
+    >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut velit, hic magni necessitatibus
       aut beatae molestiae laborum fuga voluptates, modi nisi dicta dolores. At quia dolorem laborum
       animi quo, nostrum?
@@ -38,6 +43,7 @@ storiesOf('PopupWithCard', module)
           <span className='badge badge-danger'>Danger</span>
         </div>
       }
+      style={{ maxWidth: '550px' }}
       onClose={action('onClose')}
     >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut velit, hic magni necessitatibus
@@ -58,6 +64,7 @@ storiesOf('PopupWithCard', module)
           </Button>
         </div>
       }
+      style={{ maxWidth: '550px' }}
       onClose={action('onClose')}
     >
       Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut velit, hic magni necessitatibus
@@ -66,7 +73,7 @@ storiesOf('PopupWithCard', module)
     </PopupWithCard>
   ))
   .add('With long content', () => (
-    <PopupWithCard>
+    <PopupWithCard style={{ maxWidth: '550px' }}>
       <p className='lead m-sm-5 p-sm-5'>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut velit, hic magni necessitatibus
         aut beatae molestiae laborum fuga voluptates, modi nisi dicta dolores. At quia dolorem

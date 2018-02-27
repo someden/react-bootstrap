@@ -37,7 +37,6 @@ const PopupWithCard = ({
           </Fragment>
         ) : null
       }
-      style={{ width: '550px' }}
       {...props}
     >
       {children}
