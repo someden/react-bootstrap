@@ -3,16 +3,14 @@
   "version": "0.1.0",
   "description": "React components that uses Bootstrap 4 as a base for styles.",
   "authors": [
-    "Denis Efremov <kisonic@mail.ru>"
+    "Denis Efremov <someden@ya.ru>"
   ],
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "css",
     "es",
-    "lib",
-    "umd"
+    "lib"
   ],
   "tags": [
     "react",
@@ -22,13 +20,13 @@
     "react",
     "bootstrap"
   ],
-  "homepage": "https://kisonic.github.io/react-bootstrap/",
+  "homepage": "https://someden.github.io/react-bootstrap/",
   "repository": {
     "type": "git",
-    "url": "kisonic/react-bootstrap"
+    "url": "someden/react-bootstrap"
   },
   "bugs": {
-    "url": "https://github.com/kisonic/react-bootstrap/issues"
+    "url": "https://github.com/someden/react-bootstrap/issues"
   },
   "scripts": {
     "start": "start-storybook -p 3000 -c stories",
@@ -44,27 +42,27 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "moment": "^2.19.3",
-    "prop-types": "^15.6.0",
-    "react-autocomplete": "^1.7.2",
-    "react-style-proptype": "^3.1.0"
+    "moment": "^2.20.1",
+    "prop-types": "^15.6.1",
+    "react-autocomplete": "^1.8.1",
+    "react-style-proptype": "^3.2.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.2.17",
-    "@storybook/addon-info": "^3.2.17",
-    "@storybook/addon-options": "^3.2.17",
-    "@storybook/react": "^3.2.17",
-    "babel-eslint": "^8.0.3",
-    "eslint": "^4.12.1",
+    "@storybook/addon-actions": "^3.3.14",
+    "@storybook/addon-info": "^3.3.14",
+    "@storybook/addon-options": "^3.3.14",
+    "@storybook/react": "^3.3.14",
+    "babel-eslint": "^8.2.2",
+    "eslint": "^4.18.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
-    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
     "gh-pages": "^1.1.0",
     "husky": "^0.14.3",
-    "lint-staged": "^6.0.0",
-    "nwb": "^0.20.0",
-    "prettier": "^1.8.2",
+    "lint-staged": "^7.0.0",
+    "nwb": "^0.21.5",
+    "prettier": "^1.11.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
