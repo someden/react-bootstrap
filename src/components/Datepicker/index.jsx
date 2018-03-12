@@ -6,52 +6,34 @@ import Calendar from './Calendar';
 
 import sizes from '../../utils/sizes';
 
-const getDate = (date, format) => {
-  if (!date) return '';
+const getValidMomentOrEmptyString = (date, format) =>
+  (moment(date, format).isValid() ? moment(date, format) : '');
 
-  if (typeof date === 'string') return moment(date, format).startOf('day');
+const getValidDateString = ({ date = '', format = '', minDate = '', maxDate = '' }) => {
+  const dateMoment = moment(date, format);
+  const minDateMoment = moment(minDate, format).startOf('day');
+  const maxDateMoment = moment(maxDate, format).endOf('day');
 
-  return date.clone();
-};
-
-const getValidDateString = ({ date, format, minDate, maxDate }) => {
-  if (!date) return '';
-
-  if (minDate && date.isBefore(minDate.clone().startOf('day'))) {
-    return minDate.format(format);
+  if (!dateMoment.isValid()) {
+    return '';
   }
 
-  if (maxDate && date.isAfter(maxDate.clone().endOf('day'))) {
-    return maxDate.format(format);
+  if (minDateMoment.isValid() && dateMoment.isBefore(minDateMoment)) {
+    return minDateMoment.format(format);
   }
 
-  return date.format(format);
-};
-
-const sanitizeDate = (value = '') => {
-  const dateArr = value.replace(/[^\d.,/-]/g, '').split(/[.,/-]/);
-  const day = dateArr[0] < 31 ? dateArr[0] : 31;
-  const month = dateArr[1] < 12 ? dateArr[1] : 12;
-  const year = dateArr[2];
-
-  let date = day;
-
-  if (dateArr.length > 1) {
-    date = `${date}.${month}`;
+  if (maxDateMoment.isValid() && dateMoment.isAfter(maxDateMoment)) {
+    return maxDateMoment.format(format);
   }
 
-  if (dateArr.length > 2) {
-    date = `${date}.${year}`;
-  }
-
-  return date;
+  return dateMoment.format(format);
 };
 
 class Datepicker extends Component {
   static propTypes = {
     id: PropTypes.string,
     name: PropTypes.string,
-    // eslint-disable-next-line react/no-unused-prop-types
+    type: PropTypes.string,
     date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(moment)]),
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
@@ -61,11 +43,13 @@ class Datepicker extends Component {
     maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(moment)]),
     className: PropTypes.string,
     onChange: PropTypes.func,
+    sanitizer: PropTypes.func,
   };
 
   static defaultProps = {
     id: '',
     name: '',
+    type: 'text',
     date: '',
     placeholder: '',
     disabled: false,
@@ -75,6 +59,24 @@ class Datepicker extends Component {
     maxDate: '',
     className: '',
     onChange: () => {},
+    sanitizer: (value = '') => {
+      const dateArr = value.replace(/[^\d.,/-]/g, '').split(/[.,/-]/);
+      const day = dateArr[0] < 31 ? dateArr[0] : 31;
+      const month = dateArr[1] < 12 ? dateArr[1] : 12;
+      const year = dateArr[2];
+
+      let date = day;
+
+      if (dateArr.length > 1) {
+        date = `${date}.${month}`;
+      }
+
+      if (dateArr.length > 2) {
+        date = `${date}.${year}`;
+      }
+
+      return date;
+    },
   };
 
   state = {
@@ -83,22 +85,15 @@ class Datepicker extends Component {
   };
 
   componentWillMount() {
-    this.setStateFromProps(this.props);
+    this.setDate(this.props);
   }
 
   componentWillReceiveProps(newProps) {
-    this.setStateFromProps(newProps);
+    this.setDate(newProps);
   }
 
-  setStateFromProps = ({ date, format, minDate, maxDate }) =>
-    this.setState({
-      date: getValidDateString({
-        date: getDate(date, format),
-        format,
-        minDate: getDate(minDate, format),
-        maxDate: getDate(maxDate, format),
-      }),
-    });
+  setDate = ({ date, format, minDate, maxDate }) =>
+    this.setState({ date: getValidDateString({ date, format, minDate, maxDate }) });
 
   handleClick = (e) => {
     if (this.isClickOutside(e)) {
@@ -108,60 +103,39 @@ class Datepicker extends Component {
 
   isClickOutside = e => this.datepicker && this.datepicker.compareDocumentPosition(e.target) < 16;
 
-  handleChangeDate = e =>
-    this.setState({
-      date: sanitizeDate(e.target.value),
-    });
-
-  handleSelectDate = date =>
-    this.setState({
-      date: getValidDateString({
-        date: getDate(date, this.props.format),
-        format: this.props.format,
-        minDate: getDate(this.props.minDate, this.props.format),
-        maxDate: getDate(this.props.maxDate, this.props.format),
-      }),
-    });
+  handleSelectDate = date => this.setDate({ ...this.props, date });
 
   handleShowCalendar = () =>
-    this.setState(
-      {
-        isShowCalendar: true,
-      },
-      () => {
-        document.addEventListener('click', this.handleClick);
-      }
+    this.setState({ isShowCalendar: true }, () =>
+      document.addEventListener('click', this.handleClick)
     );
+
+  handleChange = () =>
+    this.props.onChange({
+      target: {
+        id: this.props.id,
+        type: this.props.type,
+        name: this.props.name,
+        value: getValidDateString({ date: this.state.date, format: this.props.format }),
+        moment: moment(this.state.date, this.props.format),
+      },
+    });
 
   handleCloseAndChange = () => {
     document.removeEventListener('click', this.handleClick);
-    const { format, onChange } = this.props;
-
-    this.setState(
-      {
-        isShowCalendar: false,
-      },
-      () =>
-        onChange(
-          moment(this.state.date, format).isValid()
-            ? moment(this.state.date, format).format(format)
-            : ''
-        )
-    );
+    this.setState({ isShowCalendar: false }, this.handleChange);
   };
 
-  handleClearInput = () =>
-    this.setState(
-      {
-        date: '',
-      },
-      () => this.props.onChange('')
-    );
+  handleChangeInput = e => this.setState({ date: this.props.sanitizer(e.target.value) });
+
+  handleClearInput = () => this.setState({ date: '' }, this.handleChange);
 
   render() {
     const {
       id,
       name,
+      type,
+      date: dateFromProps,
       format,
       placeholder,
       disabled,
@@ -169,6 +143,9 @@ class Datepicker extends Component {
       minDate,
       maxDate,
       className,
+      onChange,
+      sanitizer,
+      ...props
     } = this.props;
     const { date, isShowCalendar } = this.state;
 
@@ -181,14 +158,15 @@ class Datepicker extends Component {
       >
         <div className='input-group'>
           <input
+            {...props}
             id={id}
             name={name}
-            type='text'
+            type={type}
             placeholder={placeholder}
             disabled={disabled}
             value={date}
             className={`form-control form-control-${size}`}
-            onChange={this.handleChangeDate}
+            onChange={this.handleChangeInput}
             onFocus={this.handleShowCalendar}
           />
           <span className='input-group-append'>
@@ -216,9 +194,9 @@ class Datepicker extends Component {
           style={{ zIndex: 4 }}
         >
           <Calendar
-            date={moment(date, format).isValid() ? moment(date, format) : ''}
-            minDate={getDate(minDate, format)}
-            maxDate={getDate(maxDate, format)}
+            date={getValidMomentOrEmptyString(date, format)}
+            minDate={getValidMomentOrEmptyString(minDate, format)}
+            maxDate={getValidMomentOrEmptyString(maxDate, format)}
             onChange={this.handleSelectDate}
             onClose={this.handleCloseAndChange}
           />

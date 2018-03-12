@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { storiesOf } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import Datepicker from '../../src/components/Datepicker';
 
@@ -8,13 +9,13 @@ storiesOf('Datepicker', module)
   .add('Datepicker', () => (
     <div className='row'>
       <div className='col'>
-        <Datepicker />
+        <Datepicker onChange={action('onChange')} />
       </div>
       <div className='col'>
-        <Datepicker minDate='20.10.2017' maxDate='20.11.2017' />
+        <Datepicker minDate='20.10.2017' maxDate='20.11.2017' onChange={action('onChange')} />
       </div>
       <div className='col'>
-        <Datepicker date='20.10.2017' />
+        <Datepicker date='20.10.2017' onChange={action('onChange')} />
       </div>
       <div className='col'>
         <Datepicker disabled />
