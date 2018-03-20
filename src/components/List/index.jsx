@@ -5,19 +5,21 @@ import Item from './Item';
 
 import './index.css';
 
-const List = ({ flush, className, children, ...props }) => (
-  <ul {...props} className={`list-group ${flush ? 'list-group-flush' : ''} ${className}`}>
+const List = ({ tag: Tag, flush, className, children, ...props }) => (
+  <Tag {...props} className={`list-group ${flush ? 'list-group-flush' : ''} ${className}`}>
     {children}
-  </ul>
+  </Tag>
 );
 
 List.propTypes = {
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   flush: PropTypes.bool,
   className: PropTypes.string,
   children: PropTypes.node,
 };
 
 List.defaultProps = {
+  tag: 'ul',
   flush: false,
   className: '',
   children: null,

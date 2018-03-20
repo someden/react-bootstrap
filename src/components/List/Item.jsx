@@ -11,6 +11,7 @@ import colors from '../../utils/colors';
 // eslint-disable-next-line react/prefer-stateless-function
 class Item extends Component {
   static propTypes = {
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     color: PropTypes.oneOf(['', ...colors]),
     active: PropTypes.bool,
     disabled: PropTypes.bool,
@@ -22,6 +23,7 @@ class Item extends Component {
   };
 
   static defaultProps = {
+    tag: 'li',
     color: '',
     active: false,
     disabled: false,
@@ -34,6 +36,7 @@ class Item extends Component {
 
   render() {
     const {
+      tag: Tag,
       color,
       active,
       disabled,
@@ -46,7 +49,7 @@ class Item extends Component {
     } = this.props;
 
     return (
-      <li
+      <Tag
         {...props}
         className={cn(
           'list-group-item',
@@ -72,7 +75,7 @@ class Item extends Component {
           </Button>
         ) : null}
         {children}
-      </li>
+      </Tag>
     );
   }
 }
