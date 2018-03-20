@@ -14,6 +14,7 @@ class Item extends Component {
     tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     color: PropTypes.oneOf(['', ...colors]),
     active: PropTypes.bool,
+    clickable: PropTypes.bool,
     disabled: PropTypes.bool,
     className: PropTypes.string,
     onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
@@ -26,6 +27,7 @@ class Item extends Component {
     tag: 'li',
     color: '',
     active: false,
+    clickable: false,
     disabled: false,
     className: '',
     onClick: false,
@@ -39,6 +41,7 @@ class Item extends Component {
       tag: Tag,
       color,
       active,
+      clickable,
       disabled,
       className,
       onClick,
@@ -55,16 +58,16 @@ class Item extends Component {
           'list-group-item',
           {
             [`list-group-item-${color}`]: color,
-            'list-group-item-action': onClick,
-            toggled: onToggle,
+            'list-group-item-action': typeof onClick === 'function' || clickable,
+            toggled: typeof onToggle === 'function',
             active,
             disabled,
           },
           className
         )}
-        {...(onClick ? { role: 'presentation', onClick } : {})}
+        {...(typeof onClick === 'function' ? { role: 'presentation', onClick } : {})}
       >
-        {onToggle ? (
+        {typeof onToggle === 'function' ? (
           <Button
             color={active ? 'primary' : 'link'}
             disabled={disabled}
