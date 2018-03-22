@@ -5,8 +5,8 @@ import cn from 'classnames';
 import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
 
-const Link = ({ outline, color, size, disabled, className, children, ...props }) => (
-  <a
+const Link = ({ tag: Tag, outline, color, size, disabled, className, children, ...props }) => (
+  <Tag
     {...props}
     className={cn(
       'btn',
@@ -17,10 +17,11 @@ const Link = ({ outline, color, size, disabled, className, children, ...props })
     )}
   >
     {children}
-  </a>
+  </Tag>
 );
 
 Link.propTypes = {
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   outline: PropTypes.bool,
   color: PropTypes.oneOf(buttonColors),
   size: PropTypes.oneOf(sizes),
@@ -30,6 +31,7 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
+  tag: 'a',
   outline: false,
   color: 'primary',
   size: 'md',
