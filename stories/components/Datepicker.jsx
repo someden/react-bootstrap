@@ -18,7 +18,7 @@ storiesOf('Datepicker', module)
         <Datepicker date='20.10.2017' onChange={action('onChange')} />
       </div>
       <div className='col'>
-        <Datepicker disabled />
+        <Datepicker date='2017-10-20' disabled />
       </div>
     </div>
   ))

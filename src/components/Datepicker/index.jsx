@@ -6,13 +6,16 @@ import Calendar from './Calendar';
 
 import sizes from '../../utils/sizes';
 
+const getMoment = (date = '', format = '') =>
+  (moment(date, format).isValid() ? moment(date, format) : moment(date));
+
 const getValidMomentOrEmptyString = (date, format) =>
-  (moment(date, format).isValid() ? moment(date, format) : '');
+  (getMoment(date, format).isValid() ? getMoment(date, format) : '');
 
 const getValidDateString = ({ date = '', format = '', minDate = '', maxDate = '' }) => {
-  const dateMoment = moment(date, format);
-  const minDateMoment = moment(minDate, format).startOf('day');
-  const maxDateMoment = moment(maxDate, format).endOf('day');
+  const dateMoment = getMoment(date, format);
+  const minDateMoment = getMoment(minDate, format).startOf('day');
+  const maxDateMoment = getMoment(maxDate, format).endOf('day');
 
   if (!dateMoment.isValid()) {
     return '';
@@ -117,7 +120,7 @@ class Datepicker extends Component {
         type: this.props.type,
         name: this.props.name,
         value: getValidDateString({ date: this.state.date, format: this.props.format }),
-        moment: moment(this.state.date, this.props.format),
+        moment: getMoment(this.state.date, this.props.format),
       },
     });
 
