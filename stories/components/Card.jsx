@@ -9,41 +9,73 @@ import List from '../../src/components/List';
 
 import colors from '../../src/utils/colors';
 
+const renderList = () => (
+  <List flush>
+    <List.Item>List Item 1</List.Item>
+    <List.Item active>List Item 2</List.Item>
+    <List.Item>
+      List Item 3
+      <List flush>
+        <List.Item>Sub List Item 1</List.Item>
+        <List.Item>
+          Sub List Item 2
+          <List flush>
+            <List.Item active>Sub List Item 1</List.Item>
+            <List.Item>Sub List Item 2</List.Item>
+            <List.Item active>Sub List Item 3</List.Item>
+          </List>
+        </List.Item>
+        <List.Item>Sub List Item 3</List.Item>
+      </List>
+    </List.Item>
+    <List.Item>List Item 4</List.Item>
+    <List.Item>
+      List Item 5
+      <List flush>
+        <List.Item>Sub List Item 1</List.Item>
+        <List.Item>Sub List Item 2</List.Item>
+        <List.Item>Sub List Item 3</List.Item>
+      </List>
+    </List.Item>
+  </List>
+);
+
 storiesOf('Card', module)
   .add('Card', () => (
     <div>
-      <div className='row mb-5'>
-        <div className='col'>
+      <div className='row'>
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card>
             <p>Basic card example.</p>
             <p>For default it is without Header and Footer, only Body.</p>
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card title='With header'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
             culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card title='With header and footer' footer='Footer'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
             culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-      </div>
 
-      <div className='row mb-5'>
-        <div className='col'>
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card title='Non collapsing card' collapsible={false}>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
             culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             title={
               <h2 className='mr-auto mb-0'>
@@ -56,7 +88,8 @@ storiesOf('Card', module)
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             title={
               <h2 className='mb-0 mx-auto'>
@@ -71,17 +104,16 @@ storiesOf('Card', module)
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-      </div>
 
-      <div className='row mb-5'>
-        <div className='col'>
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card title='With additional text in header' controls='Some text'>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
             culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             title='With additional text in header'
             controls={<div className='text-danger'>Some text</div>}
@@ -92,7 +124,8 @@ storiesOf('Card', module)
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             title='With labels in header'
             controls={
@@ -112,8 +145,8 @@ storiesOf('Card', module)
   ))
   .add('With buttons', () => (
     <div>
-      <div className='row mb-5'>
-        <div className='col'>
+      <div className='row'>
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             title='Buttons in header'
             controls={
@@ -132,7 +165,8 @@ storiesOf('Card', module)
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             title='Buttons in header'
             collapsible={false}
@@ -155,7 +189,8 @@ storiesOf('Card', module)
             cum alias vel laborum tenetur dolore enim?
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             controls={
               <div className='mr-auto'>
@@ -186,55 +221,20 @@ storiesOf('Card', module)
   ))
   .add('Custom content', () => (
     <div>
-      <div className='row mb-5'>
-        <div className='col' style={{ height: '300px' }}>
-          <Card
-            title='On full height'
-            footer={
-              <div>
-                <Button className='mr-1' onClick={action('onClick Button Ok')}>
-                  Ok
-                </Button>
-                <Button color='light' onClick={action('onClick Button Cancel')}>
-                  Cancel
-                </Button>
-              </div>
-            }
-            fullHeight
-          >
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
-              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
-              cum alias vel laborum tenetur dolore enim?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
-              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
-              cum alias vel laborum tenetur dolore enim?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
-              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
-              cum alias vel laborum tenetur dolore enim?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
-              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
-              cum alias vel laborum tenetur dolore enim?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
-              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
-              cum alias vel laborum tenetur dolore enim?
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
-              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
-              cum alias vel laborum tenetur dolore enim?
-            </p>
+      <div className='row'>
+        <div className='col-md-6 col-xl-3 mb-5' style={{ height: '300px' }}>
+          <Card customBody fullHeight>
+            {renderList()}
           </Card>
         </div>
-        <div className='col' style={{ height: '300px' }}>
+
+        <div className='col-md-6 col-xl-3 mb-5' style={{ height: '300px' }}>
+          <Card title='List instead body' customBody fullHeight>
+            {renderList()}
+          </Card>
+        </div>
+
+        <div className='col-md-6 col-xl-3 mb-5' style={{ height: '300px' }}>
           <Card
             title='List instead body'
             className='mb-5'
@@ -251,103 +251,65 @@ storiesOf('Card', module)
             customBody
             fullHeight
           >
-            <List flush>
-              <List.Item>List Item 1</List.Item>
-              <List.Item>List Item 2</List.Item>
-              <List.Item>
-                List Item 3
-                <List flush>
-                  <List.Item>Sub List Item 1</List.Item>
-                  <List.Item>
-                    Sub List Item 2
-                    <List flush>
-                      <List.Item>Sub List Item 1</List.Item>
-                      <List.Item>Sub List Item 2</List.Item>
-                      <List.Item>Sub List Item 3</List.Item>
-                    </List>
-                  </List.Item>
-                  <List.Item>Sub List Item 3</List.Item>
-                </List>
-              </List.Item>
-              <List.Item>List Item 4</List.Item>
-              <List.Item>
-                List Item 5
-                <List flush>
-                  <List.Item>Sub List Item 1</List.Item>
-                  <List.Item>Sub List Item 2</List.Item>
-                  <List.Item>Sub List Item 3</List.Item>
-                </List>
-              </List.Item>
-            </List>
+            {renderList()}
           </Card>
         </div>
-        <div className='col' style={{ height: '300px' }}>
-          <Card title='List instead body' customBody fullHeight>
-            <List flush>
-              <List.Item>List Item 1</List.Item>
-              <List.Item>List Item 2</List.Item>
-              <List.Item>
-                List Item 3
-                <List flush>
-                  <List.Item>Sub List Item 1</List.Item>
-                  <List.Item>
-                    Sub List Item 2
-                    <List flush>
-                      <List.Item>Sub List Item 1</List.Item>
-                      <List.Item>Sub List Item 2</List.Item>
-                      <List.Item>Sub List Item 3</List.Item>
-                    </List>
-                  </List.Item>
-                  <List.Item>Sub List Item 3</List.Item>
-                </List>
-              </List.Item>
-              <List.Item>List Item 4</List.Item>
-              <List.Item>
-                List Item 5
-                <List flush>
-                  <List.Item>Sub List Item 1</List.Item>
-                  <List.Item>Sub List Item 2</List.Item>
-                  <List.Item>Sub List Item 3</List.Item>
-                </List>
-              </List.Item>
-            </List>
+
+        <div className='col-md-6 col-xl-3 mb-5'>
+          <Card
+            footer={
+              <div>
+                <Button className='mr-1' onClick={action('onClick Button Ok')}>
+                  Ok
+                </Button>
+                <Button color='light' onClick={action('onClick Button Cancel')}>
+                  Cancel
+                </Button>
+              </div>
+            }
+            fullHeight
+            style={{ height: '300px' }}
+          >
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
+              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
+              cum alias vel laborum tenetur dolore enim?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
+              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
+              cum alias vel laborum tenetur dolore enim?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
+              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
+              cum alias vel laborum tenetur dolore enim?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
+              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
+              cum alias vel laborum tenetur dolore enim?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
+              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
+              cum alias vel laborum tenetur dolore enim?
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
+              culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum
+              cum alias vel laborum tenetur dolore enim?
+            </p>
           </Card>
         </div>
-      </div>
-      <div className='row mb-5'>
-        <div className='col'>
+
+        <div className='col-md-4 mb-5'>
           <Card title='List instead body' customBody>
-            <List flush>
-              <List.Item>List Item 1</List.Item>
-              <List.Item active>List Item 2</List.Item>
-              <List.Item>
-                List Item 3
-                <List flush>
-                  <List.Item>Sub List Item 1</List.Item>
-                  <List.Item>
-                    Sub List Item 2
-                    <List flush>
-                      <List.Item active>Sub List Item 1</List.Item>
-                      <List.Item>Sub List Item 2</List.Item>
-                      <List.Item active>Sub List Item 3</List.Item>
-                    </List>
-                  </List.Item>
-                  <List.Item>Sub List Item 3</List.Item>
-                </List>
-              </List.Item>
-              <List.Item>List Item 4</List.Item>
-              <List.Item>
-                List Item 5
-                <List flush>
-                  <List.Item>Sub List Item 1</List.Item>
-                  <List.Item>Sub List Item 2</List.Item>
-                  <List.Item>Sub List Item 3</List.Item>
-                </List>
-              </List.Item>
-            </List>
+            {renderList()}
           </Card>
         </div>
-        <div className='col'>
+
+        <div className='col-md-4 mb-5'>
           <Card title='Table instead body' customBody>
             <table className='table mb-0'>
               <thead>
@@ -381,7 +343,8 @@ storiesOf('Card', module)
             </table>
           </Card>
         </div>
-        <div className='col' style={{ height: '300px' }}>
+
+        <div className='col-md-4 mb-5' style={{ height: '300px' }}>
           <Card title='Table instead body' customBody fullHeight>
             <table className='table mb-0'>
               <tbody>
@@ -456,7 +419,7 @@ storiesOf('Card', module)
     <div>
       <div className='row'>
         {colors.map(color => (
-          <div key={color} className='col-3 mb-5'>
+          <div key={color} className='col-md-6 col-md-4 col-lg-3 mb-5'>
             <Card color={color} title={color}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
               culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum

@@ -112,6 +112,7 @@ class Card extends Component {
           className={cn({
             'd-none': !showBodyAndFooter,
             'card-body-on-full-height': fullHeight,
+            'rounded-top': fullHeight && !(title || controls),
             'rounded-bottom': fullHeight && !footer,
           })}
         >

@@ -1,6 +1,4 @@
 .card-on-full-height {
-  display: flex;
-  flex-direction: column;
   height: 100%;
 }
 
