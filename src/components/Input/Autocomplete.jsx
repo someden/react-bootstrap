@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cn from 'classnames';
-import ReactAutocomplete from 'react-autocomplete';
+import Autocomplete from 'react-autocomplete';
 
-const Autocomplete = props => (
-  <ReactAutocomplete
+const AutocompleteWrap = ({ innerRef, ...props }) => (
+  <Autocomplete
     getItemValue={item => item.name}
     wrapperProps={{ className: 'dropdown' }}
     wrapperStyle={{}}
@@ -18,8 +19,17 @@ const Autocomplete = props => (
         {item.name}
       </button>
     )}
+    {...(typeof innerRef === 'function' ? { ref: innerRef } : {})}
     {...props}
   />
 );
 
-export default Autocomplete;
+AutocompleteWrap.propTypes = {
+  innerRef: PropTypes.func,
+};
+
+AutocompleteWrap.defaultProps = {
+  innerRef: null,
+};
+
+export default AutocompleteWrap;
