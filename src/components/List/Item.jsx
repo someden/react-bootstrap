@@ -17,8 +17,8 @@ class Item extends Component {
     clickable: PropTypes.bool,
     disabled: PropTypes.bool,
     className: PropTypes.string,
-    onClick: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-    onToggle: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+    onClick: PropTypes.func,
+    onToggle: PropTypes.func,
     toggleIconName: PropTypes.string,
     children: PropTypes.node,
   };
@@ -30,8 +30,8 @@ class Item extends Component {
     clickable: false,
     disabled: false,
     className: '',
-    onClick: false,
-    onToggle: false,
+    onClick: null,
+    onToggle: null,
     toggleIconName: 'plus',
     children: null,
   };
