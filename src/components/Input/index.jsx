@@ -20,19 +20,19 @@ const unstyledInputTypes = [
   'range',
 ];
 
-// Class based component instead stateless functional, because refs needed.
-// eslint-disable-next-line react/prefer-stateless-function
 class Input extends Component {
   static propTypes = {
     type: PropTypes.string,
     size: PropTypes.oneOf(sizes),
     className: PropTypes.string,
+    innerRef: PropTypes.func,
   };
 
   static defaultProps = {
     type: 'text',
     size: 'md',
     className: '',
+    innerRef: null,
   };
 
   static Autocomplete = Autocomplete;
@@ -40,11 +40,12 @@ class Input extends Component {
   static Group = Group;
 
   render() {
-    const { size, className, ...props } = this.props;
+    const { size, className, innerRef, ...props } = this.props;
 
     return (
       <input
         {...props}
+        {...(typeof innerRef === 'function' ? { ref: innerRef } : {})}
         className={cn(
           !unstyledInputTypes.includes(props.type) && `form-control form-control-${size}`,
           className
