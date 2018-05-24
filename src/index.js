@@ -11,6 +11,7 @@ import Icon from './components/Icon';
 import Input from './components/Input';
 import List from './components/List';
 import Loader from './components/Loader';
+import Popover from './components/Popover';
 import Popup from './components/Popup';
 import PopupWithCard from './components/PopupWithCard';
 import Select from './components/Select';
@@ -31,6 +32,7 @@ export {
   Input,
   List,
   Loader,
+  Popover,
   Popup,
   PopupWithCard,
   Select,

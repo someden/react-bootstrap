@@ -43,6 +43,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "moment": "^2.22.1",
+    "popper.js": "^1.14.3",
     "prop-types": "^15.6.1",
     "react-autocomplete": "^1.8.1",
     "react-style-proptype": "^3.2.1"
