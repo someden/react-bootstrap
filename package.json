@@ -1,5 +1,5 @@
 {
-  "name": "react-bootstrap",
+  "name": "@someden/react-bootstrap",
   "version": "0.1.0",
   "description": "React components that uses Bootstrap 4 as a base for styles.",
   "authors": [
@@ -14,7 +14,9 @@
   ],
   "tags": [
     "react",
-    "bootstrap"
+    "bootstrap",
+    "ui",
+    "components"
   ],
   "keywords": [
     "react",
@@ -37,8 +39,10 @@
     "deploy": "gh-pages -b build -d . -s '{package.json,es/**,lib/**}'",
     "build-storybook": "build-storybook -c stories -o build/storybook",
     "deploy-storybook": "gh-pages -d build/storybook",
-    "precommit": "lint-staged",
-    "prepush": "(yarn run build && yarn run deploy) ; (yarn run build-storybook && yarn run deploy-storybook) ; exit 0"
+    "precommit": "lint-staged"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "classnames": "^2.2.5",
