@@ -17,6 +17,7 @@ import PopupWithCard from './components/PopupWithCard';
 import Select from './components/Select';
 import Spinner from './components/Spinner';
 import Tabs from './components/Tabs';
+import Tooltip from './components/Tooltip';
 
 export {
   Button,
@@ -38,4 +39,5 @@ export {
   Select,
   Spinner,
   Tabs,
+  Tooltip,
 };
