@@ -6,6 +6,8 @@ class Popper extends Component {
   static propTypes = {
     placement: PropTypes.oneOf(['top', 'left', 'bottom', 'right']).isRequired,
     reference: PropTypes.instanceOf(Element).isRequired,
+    onMouseEnter: PropTypes.func.isRequired,
+    onMouseLeave: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
   };
 
@@ -71,11 +73,17 @@ class Popper extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { onMouseEnter, onMouseLeave, children } = this.props;
     const { placement } = this.state;
 
     return (
-      <div ref={this.setPopperNode} className={`popover bs-popover-${placement}`} role='tooltip'>
+      <div
+        ref={this.setPopperNode}
+        className={`popover bs-popover-${placement}`}
+        role='tooltip'
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
         <div ref={this.setArrowNode} className='arrow' />
         <div className='popover-body'>{children}</div>
       </div>

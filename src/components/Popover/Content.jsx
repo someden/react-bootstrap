@@ -6,9 +6,14 @@ import Popper from './Popper';
 
 const Content = ({ children }) => (
   <Consumer>
-    {({ placement, referenceNode, showContent }) =>
+    {({ placement, referenceNode, showContent, onMouseEnter, onMouseLeave }) =>
       (showContent ? (
-        <Popper placement={placement} reference={referenceNode}>
+        <Popper
+          placement={placement}
+          reference={referenceNode}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {children}
         </Popper>
       ) : null)

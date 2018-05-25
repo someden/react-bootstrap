@@ -5,11 +5,11 @@ import { Consumer } from './context';
 
 const Reference = ({ children: element }) => (
   <Consumer>
-    {({ setReferenceNode, onMouseEnterOnReference, onMouseLeaveFromReference }) =>
+    {({ setReferenceNode, onMouseEnter, onMouseLeave }) =>
       cloneElement(element, {
         ref: setReferenceNode,
-        onMouseEnter: onMouseEnterOnReference,
-        onMouseLeave: onMouseLeaveFromReference,
+        onMouseEnter,
+        onMouseLeave,
       })
     }
   </Consumer>

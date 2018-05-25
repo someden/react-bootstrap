@@ -11,40 +11,37 @@ class Popover extends PureComponent {
   };
 
   static defaultProps = {
-    placement: 'bottom',
+    placement: 'top',
   };
 
   static Reference = Reference;
   static Content = Content;
 
   state = {
-    placement: this.props.placement,
     showContent: false,
     referenceNode: null,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.placement !== prevState.placement) {
-      return { placement: nextProps.placement };
-    }
-
-    return null;
-  }
-
   setReferenceNode = node => this.setState({ referenceNode: node });
 
-  showContent = () => this.setState({ showContent: true });
+  handleMouseEnter = () => this.setState({ showContent: true }, this.clearTimeout);
 
-  hideContent = () => this.setState({ showContent: false });
+  hideMouseLeave = () => {
+    this.timeoutId = setTimeout(() => this.setState({ showContent: false }), this.timeoutDelay);
+  };
+
+  timeoutId = null;
+  timeoutDelay = 100;
+  clearTimeout = () => clearTimeout(this.timeoutId);
 
   render() {
     const context = {
       showContent: this.state.showContent,
-      placement: this.state.placement,
+      placement: this.props.placement,
       referenceNode: this.state.referenceNode,
       setReferenceNode: this.setReferenceNode,
-      onMouseEnterOnReference: this.showContent,
-      onMouseLeaveFromReference: this.hideContent,
+      onMouseEnter: this.handleMouseEnter,
+      onMouseLeave: this.hideMouseLeave,
     };
     return <Provider value={context}>{this.props.children}</Provider>;
   }
