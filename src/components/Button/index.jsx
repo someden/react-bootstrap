@@ -8,13 +8,16 @@ import Link from './Link';
 import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
 
-const Button = ({ tag: Tag, outline, color, size, className, children, ...props }) => (
-  <Tag
-    {...props}
-    className={cn('btn', `btn-${size}`, `btn${outline ? '-outline' : ''}-${color}`, className)}
-  >
-    {children}
-  </Tag>
+const Button = React.forwardRef(
+  ({ tag: Tag, outline, color, size, className, children, ...props }, ref) => (
+    <Tag
+      {...props}
+      ref={ref}
+      className={cn('btn', `btn-${size}`, `btn${outline ? '-outline' : ''}-${color}`, className)}
+    >
+      {children}
+    </Tag>
+  )
 );
 
 Button.propTypes = {
