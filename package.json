@@ -20,7 +20,9 @@
   ],
   "keywords": [
     "react",
-    "bootstrap"
+    "bootstrap",
+    "ui",
+    "components"
   ],
   "homepage": "https://someden.github.io/react-bootstrap/",
   "repository": {
@@ -53,10 +55,10 @@
     "react-style-proptype": "^3.2.1"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.4.5",
-    "@storybook/addon-info": "^3.4.5",
-    "@storybook/addon-options": "^3.4.5",
-    "@storybook/react": "^3.4.5",
+    "@storybook/addon-actions": "^3.4.6",
+    "@storybook/addon-info": "^3.4.6",
+    "@storybook/addon-options": "^3.4.6",
+    "@storybook/react": "^3.4.6",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
@@ -67,13 +69,13 @@
     "husky": "^0.14.3",
     "lint-staged": "^7.1.2",
     "nwb": "^0.21.5",
-    "prettier": "^1.12.1",
+    "prettier": "^1.13.3",
     "react": "^16.4.0",
     "react-dom": "^16.4.0"
   },
   "peerDependencies": {
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   },
   "eslintConfig": {
     "root": true,
