@@ -20,6 +20,7 @@ class Item extends Component {
     onClick: PropTypes.func,
     onToggle: PropTypes.func,
     toggleIconName: PropTypes.string,
+    innerRef: PropTypes.func,
     children: PropTypes.node,
   };
 
@@ -33,6 +34,7 @@ class Item extends Component {
     onClick: null,
     onToggle: null,
     toggleIconName: 'plus',
+    innerRef: null,
     children: null,
   };
 
@@ -47,13 +49,16 @@ class Item extends Component {
       onClick,
       onToggle,
       toggleIconName,
+      innerRef,
       children,
       ...props
     } = this.props;
 
     return (
       <Tag
+        {...(typeof onClick === 'function' ? { role: 'presentation', onClick } : {})}
         {...props}
+        ref={typeof innerRef === 'function' ? innerRef : undefined}
         className={cn(
           'list-group-item',
           {
@@ -65,7 +70,6 @@ class Item extends Component {
           },
           className
         )}
-        {...(typeof onClick === 'function' ? { role: 'presentation', onClick } : {})}
       >
         {typeof onToggle === 'function' ? (
           <Button
