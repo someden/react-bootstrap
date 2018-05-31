@@ -1,46 +1,74 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import Group from './Group';
-import Link from './Link';
 
 import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
 
-const Button = React.forwardRef(
-  ({ tag: Tag, outline, color, size, className, children, ...props }, ref) => (
-    <Tag
-      {...props}
-      ref={ref}
-      className={cn('btn', `btn-${size}`, `btn${outline ? '-outline' : ''}-${color}`, className)}
-    >
-      {children}
-    </Tag>
-  )
-);
+class Button extends Component {
+  static propTypes = {
+    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    type: PropTypes.string,
+    active: PropTypes.bool,
+    outline: PropTypes.bool,
+    color: PropTypes.oneOf(buttonColors),
+    size: PropTypes.oneOf(sizes),
+    className: PropTypes.string,
+    innerRef: PropTypes.func,
+    children: PropTypes.node,
+  };
 
-Button.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  type: PropTypes.string,
-  outline: PropTypes.bool,
-  color: PropTypes.oneOf(buttonColors),
-  size: PropTypes.oneOf(sizes),
-  className: PropTypes.string,
-  children: PropTypes.node,
-};
+  static defaultProps = {
+    tag: 'button',
+    type: 'button',
+    active: false,
+    outline: false,
+    color: 'primary',
+    size: 'md',
+    className: '',
+    innerRef: null,
+    children: null,
+  };
 
-Button.defaultProps = {
-  tag: 'button',
-  type: 'button',
-  outline: false,
-  color: 'primary',
-  size: 'md',
-  className: '',
-  children: null,
-};
+  static Group = Group;
 
-Button.Group = Group;
-Button.Link = Link;
+  render() {
+    const {
+      tag,
+      type,
+      active,
+      outline,
+      color,
+      size,
+      className,
+      innerRef,
+      children,
+      ...props
+    } = this.props;
+
+    const Tag = props.href && tag === 'button' ? 'a' : tag;
+
+    const classNames = cn(
+      'btn',
+      `btn-${size}`,
+      `btn${outline ? '-outline' : ''}-${color}`,
+      { active, disabled: props.disabled },
+      className
+    );
+
+    return (
+      <Tag
+        {...props}
+        type={Tag === 'button' ? type : undefined}
+        ref={typeof innerRef === 'function' ? innerRef : undefined}
+        className={classNames}
+      >
+        {children}
+      </Tag>
+    );
+  }
+}
 
 export default Button;
