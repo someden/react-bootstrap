@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import Reference from './Reference';
 import Content from './Content';
@@ -22,7 +23,8 @@ class Popover extends PureComponent {
     referenceNode: null,
   };
 
-  setReferenceNode = node => this.setState({ referenceNode: node });
+  // eslint-disable-next-line react/no-find-dom-node
+  setReferenceNode = node => this.setState({ referenceNode: findDOMNode(node) });
 
   handleMouseEnter = () => this.setState({ showContent: true }, this.clearTimeout);
 
