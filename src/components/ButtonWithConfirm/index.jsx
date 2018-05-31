@@ -1,15 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '../Button';
 import ButtonWithLoader from '../ButtonWithLoader';
 import PopupWithCard from '../PopupWithCard';
 
+import buttonColors from '../../utils/buttonColors';
+
 class ButtonWithConfirm extends Component {
   static propTypes = {
     confirmMessage: PropTypes.string,
     confirmButtonText: PropTypes.string,
-    confirmButtonColor: Button.propTypes.color,
+    confirmButtonColor: PropTypes.oneOf(buttonColors),
     cancelButtonText: PropTypes.string,
     onClick: PropTypes.func,
     onConfirm: PropTypes.func,
@@ -62,28 +64,30 @@ class ButtonWithConfirm extends Component {
     } = this.props;
     const { showConfirmPopup } = this.state;
 
-    return [
-      <Button key='button' {...props} onClick={this.handleClick} />,
-      showConfirmPopup ? (
-        <PopupWithCard
-          key='popup'
-          footer={
-            <div>
-              <ButtonWithLoader color={confirmButtonColor} onClick={this.handleConfirm}>
-                {confirmButtonText}
-              </ButtonWithLoader>
-              <Button color='light' className='ml-1' onClick={this.toggleConfirmPopup}>
-                {cancelButtonText}
-              </Button>
-            </div>
-          }
-          className='text-left'
-          onClose={this.toggleConfirmPopup}
-        >
-          {confirmMessage}
-        </PopupWithCard>
-      ) : null,
-    ];
+    return (
+      <Fragment>
+        <Button {...props} onClick={this.handleClick} />
+        {showConfirmPopup ? (
+          <PopupWithCard
+            key='popup'
+            footer={
+              <div>
+                <ButtonWithLoader color={confirmButtonColor} onClick={this.handleConfirm}>
+                  {confirmButtonText}
+                </ButtonWithLoader>
+                <Button color='light' className='ml-1' onClick={this.toggleConfirmPopup}>
+                  {cancelButtonText}
+                </Button>
+              </div>
+            }
+            className='text-left'
+            onClose={this.toggleConfirmPopup}
+          >
+            {confirmMessage}
+          </PopupWithCard>
+        ) : null}
+      </Fragment>
+    );
   }
 }
 
