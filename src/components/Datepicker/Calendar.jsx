@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
+import { isValidMoment, getValidDateString } from '../../utils/date';
+
 const WEEKDAYS = Array(7)
   .fill(0)
   .map((zero, index) =>
@@ -26,48 +28,54 @@ const VIEWTYPE = {
 
 class Calendar extends Component {
   static propTypes = {
-    date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(moment)]),
-    minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(moment)]),
-    maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(moment)]),
+    date: PropTypes.instanceOf(moment),
+    minDate: PropTypes.instanceOf(moment),
+    maxDate: PropTypes.instanceOf(moment),
     onChange: PropTypes.func,
     onClose: PropTypes.func,
   };
 
   static defaultProps = {
-    date: '',
-    minDate: '',
-    maxDate: '',
+    date: null,
+    minDate: null,
+    maxDate: null,
     onChange: () => {},
     onClose: () => {},
   };
 
-  state = {
-    date: moment(),
-    viewType: VIEWTYPE.DAYS,
-  };
+  constructor(props) {
+    super(props);
 
-  componentWillMount() {
-    this.setStateFromProps(this.props);
+    this.state = {
+      date: this.getValidDate(props),
+      viewType: VIEWTYPE.DAYS,
+    };
   }
 
-  componentWillReceiveProps(newProps) {
-    this.setStateFromProps(newProps);
+  componentDidUpdate(prevProps) {
+    if (getValidDateString(prevProps) !== getValidDateString(this.props)) {
+      this.setDate(this.props);
+    }
   }
 
-  setStateFromProps = ({ date, minDate, maxDate }) =>
-    this.setState((state) => {
-      const validDate = date instanceof moment ? date : moment();
-
-      if (minDate instanceof moment && validDate.isBefore(minDate.clone().startOf('day'))) {
-        return { ...state, date: minDate.clone() };
-      }
-
-      if (maxDate instanceof moment && validDate.isAfter(maxDate.clone().endOf('day'))) {
-        return { ...state, date: maxDate.clone() };
-      }
-
-      return { ...state, date: validDate.clone() };
+  setDate = props =>
+    this.setState({
+      date: this.getValidDate(props),
     });
+
+  getValidDate = ({ date, minDate, maxDate }) => {
+    const validDate = isValidMoment(date) ? date : moment();
+
+    if (isValidMoment(minDate) && validDate.isBefore(minDate.clone().startOf('day'))) {
+      return minDate.clone();
+    }
+
+    if (isValidMoment(maxDate) && validDate.isAfter(maxDate.clone().endOf('day'))) {
+      return maxDate.clone();
+    }
+
+    return validDate.clone();
+  };
 
   handleSetYearsView = () =>
     this.setState({
@@ -135,7 +143,7 @@ class Calendar extends Component {
     const { minDate } = this.props;
     const { date } = this.state;
 
-    if (!(minDate instanceof moment)) return true;
+    if (!isValidMoment(minDate)) return true;
 
     const startMonthDate = date.clone().startOf('month');
     return minDate.isBefore(startMonthDate);
@@ -145,7 +153,7 @@ class Calendar extends Component {
     const { maxDate } = this.props;
     const { date } = this.state;
 
-    if (!(maxDate instanceof moment)) return true;
+    if (!isValidMoment(maxDate)) return true;
 
     const endDateMonth = date.clone().endOf('month');
     return maxDate.isAfter(endDateMonth);
@@ -158,8 +166,8 @@ class Calendar extends Component {
     const yearInCenter = date.year();
 
     const border = {
-      min: minDate instanceof moment ? minDate.year() : 1,
-      max: maxDate instanceof moment ? maxDate.year() : 99999,
+      min: isValidMoment(minDate) ? minDate.year() : 1,
+      max: isValidMoment(maxDate) ? maxDate.year() : Infinity,
     };
 
     const yearsCount = 25;
@@ -217,8 +225,8 @@ class Calendar extends Component {
     const selectedYear = date.year();
     const selectedMonth = date.month();
     const border = {
-      min: minDate instanceof moment && minDate.year() === selectedYear ? minDate.month() : 0,
-      max: maxDate instanceof moment && maxDate.year() === selectedYear ? maxDate.month() : 11,
+      min: isValidMoment(minDate) && minDate.year() === selectedYear ? minDate.month() : 0,
+      max: isValidMoment(maxDate) && maxDate.year() === selectedYear ? maxDate.month() : 11,
     };
 
     return (
@@ -316,16 +324,15 @@ class Calendar extends Component {
     const todayValueOf = moment()
       .startOf('day')
       .valueOf();
-    const selectedDateValueOf =
-      selectedDate instanceof moment
-        ? selectedDate
-            .clone()
-            .startOf('day')
-            .valueOf()
-        : null;
+    const selectedDateValueOf = isValidMoment(selectedDate)
+      ? selectedDate
+          .clone()
+          .startOf('day')
+          .valueOf()
+      : null;
     const isAvailable = !(
-      (minDate instanceof moment && day.isBefore(minDate.clone().startOf('day'))) ||
-      (maxDate instanceof moment && day.isAfter(maxDate.clone().endOf('day')))
+      (isValidMoment(minDate) && day.isBefore(minDate.clone().startOf('day'))) ||
+      (isValidMoment(maxDate) && day.isAfter(maxDate.clone().endOf('day')))
     );
 
     return (

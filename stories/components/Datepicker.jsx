@@ -9,13 +9,18 @@ storiesOf('Datepicker', module)
   .add('Datepicker', () => (
     <div className='row'>
       <div className='col'>
-        <Datepicker onChange={action('onChange')} />
+        <Datepicker onChange={action('onChange')} onBlur={action('onBlur')} />
       </div>
       <div className='col'>
-        <Datepicker minDate='20.10.2017' maxDate='20.11.2017' onChange={action('onChange')} />
+        <Datepicker
+          minDate='2017-10-20'
+          maxDate='2017-11-20'
+          onChange={action('onChange')}
+          onBlur={action('onBlur')}
+        />
       </div>
       <div className='col'>
-        <Datepicker date='20.10.2017' onChange={action('onChange')} />
+        <Datepicker date='2017-10-20' onChange={action('onChange')} onBlur={action('onBlur')} />
       </div>
       <div className='col'>
         <Datepicker date='2017-10-20' disabled />
