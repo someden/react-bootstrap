@@ -77,8 +77,7 @@ class Datepicker extends Component {
 
   handleCloseAndBlur = () => {
     document.removeEventListener('click', this.handleClick);
-    this.setState({ isShowCalendar: false });
-    this.handleBlur();
+    this.setState({ isShowCalendar: false }, this.handleBlur);
   };
 
   handleChangeInput = (e) => {
