@@ -146,6 +146,7 @@ class Datepicker extends Component {
           <span className='input-group-append'>
             {inputValue ? (
               <button
+                type='button'
                 disabled={disabled}
                 className='btn btn-secondary'
                 onClick={this.handleClearInput}
@@ -154,6 +155,7 @@ class Datepicker extends Component {
               </button>
             ) : (
               <button
+                type='button'
                 disabled={disabled}
                 className='btn btn-secondary'
                 onClick={this.handleShowCalendar}

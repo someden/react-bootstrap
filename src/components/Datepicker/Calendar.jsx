@@ -177,6 +177,7 @@ class Calendar extends Component {
       <div>
         <div className='d-flex mb-1'>
           <button
+            type='button'
             className='btn btn-light mr-auto'
             disabled={!this.isAvailablePrev()}
             onClick={this.handlePrevYear}
@@ -184,6 +185,7 @@ class Calendar extends Component {
             <i className='fa fa-chevron-left' />
           </button>
           <button
+            type='button'
             className='btn btn-light ml-auto'
             disabled={!this.isAvailableNext()}
             onClick={this.handleNextYear}
@@ -200,6 +202,7 @@ class Calendar extends Component {
               return (
                 <button
                   key={year}
+                  type='button'
                   className={`
                     btn btn-link px-0
                     ${year === yearInCenter ? 'font-weight-bold' : ''}
@@ -234,6 +237,7 @@ class Calendar extends Component {
         {MONTHS.map((month, index) => (
           <button
             key={month}
+            type='button'
             className={`
               btn btn-link text-capitalize px-0
               ${index === selectedMonth ? 'font-weight-bold' : ''}
@@ -281,19 +285,21 @@ class Calendar extends Component {
       <div>
         <div className='d-flex mb-1'>
           <button
+            type='button'
             className='btn btn-light mr-auto'
             disabled={!this.isAvailablePrev()}
             onClick={this.handlePrevMonth}
           >
             <i className='fa fa-chevron-left' />
           </button>
-          <button className='btn btn-link' onClick={this.handleSetMonthsView}>
+          <button type='button' className='btn btn-link' onClick={this.handleSetMonthsView}>
             <span className='text-capitalize'>{MONTHS[date.month()]}</span>
           </button>
-          <button className='btn btn-link' onClick={this.handleSetYearsView}>
+          <button type='button' className='btn btn-link' onClick={this.handleSetYearsView}>
             {date.year()}
           </button>
           <button
+            type='button'
             className='btn btn-light ml-auto'
             disabled={!this.isAvailableNext()}
             onClick={this.handleNextMonth}
@@ -338,6 +344,7 @@ class Calendar extends Component {
     return (
       <button
         key={dayValueOf}
+        type='button'
         className={`
           btn rounded-circle p-0 border-0
           ${todayValueOf === dayValueOf ? 'font-weight-bold' : ''}
