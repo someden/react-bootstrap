@@ -69,7 +69,6 @@ class ButtonWithConfirm extends Component {
         <Button {...props} onClick={this.handleClick} />
         {showConfirmPopup ? (
           <PopupWithCard
-            key='popup'
             footer={
               <div>
                 <ButtonWithLoader color={confirmButtonColor} onClick={this.handleConfirm}>
