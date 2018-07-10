@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './index.css';
 
 const Popup = ({ closeButtonTitle, className, onClose, children, ...props }) => (
-  <div className='popup'>
+  <div className='popup text-body'>
     <button className='popup-close-bg' onClick={onClose} title={closeButtonTitle} />
     <div className='popup-content'>
       <div className={`popup-body ${className}`} {...props}>

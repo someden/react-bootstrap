@@ -6,7 +6,10 @@ import Item from './Item';
 import './index.css';
 
 const List = ({ tag: Tag, flush, className, children, ...props }) => (
-  <Tag {...props} className={`list-group ${flush ? 'list-group-flush' : ''} ${className}`}>
+  <Tag
+    {...props}
+    className={`list-group text-body ${flush ? 'list-group-flush' : ''} ${className}`}
+  >
     {children}
   </Tag>
 );

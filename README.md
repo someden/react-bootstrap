@@ -26,7 +26,3 @@ yarn add @someden/react-bootstrap
 ### Demo Development Server
 
 - `yarn start` will run a development server with the component's demo app at [http://localhost:3000](http://localhost:3000) with hot module reloading.
-
-### TODO
-
-- Do something with hardcoded colors in `.list-group` and `.popup-body`
