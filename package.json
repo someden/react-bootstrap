@@ -1,6 +1,6 @@
 {
   "name": "@someden/react-bootstrap",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React components that uses Bootstrap 4 as a base for styles.",
   "authors": [
     "Denis Efremov <someden@ya.ru>"
