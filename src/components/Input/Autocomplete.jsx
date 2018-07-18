@@ -15,7 +15,11 @@ const AutocompleteWrap = ({ innerRef, ...props }) => (
       <div className={`dropdown-menu ${items.length ? 'show' : ''}`}>{items}</div>
     )}
     renderItem={(item, isHighlighted) => (
-      <button key={item.value} className={`dropdown-item ${isHighlighted ? 'active' : ''}`}>
+      <button
+        key={item.value}
+        type='button'
+        className={`dropdown-item ${isHighlighted ? 'active' : ''}`}
+      >
         {item.name}
       </button>
     )}

@@ -16,6 +16,7 @@ class Tooltip extends PureComponent {
   };
 
   static Reference = Reference;
+
   static Content = Content;
 
   state = {

@@ -36,7 +36,9 @@ class Input extends Component {
   };
 
   static Autocomplete = Autocomplete;
+
   static File = File;
+
   static Group = Group;
 
   render() {

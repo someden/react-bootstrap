@@ -1,15 +1,20 @@
 import React, { Component, Children, cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
 import Card from '../Card';
 import Tabs from '../Tabs';
 
 class CardWithTabs extends Component {
   static propTypes = {
-    ...Tabs.propTypes,
+    defaultIndex: PropTypes.number,
+    onToggle: PropTypes.func,
+    children: PropTypes.node,
   };
 
   static defaultProps = {
-    ...Tabs.defaultProps,
+    defaultIndex: 0,
+    onToggle: () => {},
+    children: null,
   };
 
   static Item = Tabs.Item;

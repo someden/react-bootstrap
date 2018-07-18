@@ -19,7 +19,9 @@ class Tabs extends Component {
   };
 
   static Nav = Nav;
+
   static NavItem = NavItem;
+
   static Item = Item;
 
   state = {

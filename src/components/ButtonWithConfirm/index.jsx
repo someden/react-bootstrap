@@ -48,9 +48,9 @@ class ButtonWithConfirm extends Component {
 
   toggleConfirmPopup = () =>
     !this.isUnmounted &&
-    this.setState({
-      showConfirmPopup: !this.state.showConfirmPopup,
-    });
+    this.setState(state => ({
+      showConfirmPopup: !state.showConfirmPopup,
+    }));
 
   render() {
     const {

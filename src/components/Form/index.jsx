@@ -17,7 +17,9 @@ class Form extends Component {
   };
 
   static Label = Label;
+
   static Group = Group;
+
   static Text = Text;
 
   handleSubmit = (e) => {

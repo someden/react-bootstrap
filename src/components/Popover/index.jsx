@@ -16,6 +16,7 @@ class Popover extends PureComponent {
   };
 
   static Reference = Reference;
+
   static Content = Content;
 
   state = {
@@ -33,7 +34,9 @@ class Popover extends PureComponent {
   };
 
   timeoutId = null;
+
   timeoutDelay = 100;
+
   clearTimeout = () => clearTimeout(this.timeoutId);
 
   render() {

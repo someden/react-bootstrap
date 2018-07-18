@@ -14,7 +14,9 @@ class Popper extends Component {
   };
 
   popper = null;
+
   popperNode = null;
+
   arrowNode = null;
 
   componentDidMount() {

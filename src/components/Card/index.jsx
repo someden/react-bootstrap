@@ -44,8 +44,11 @@ class Card extends Component {
   };
 
   static Container = Container;
+
   static Header = Header;
+
   static Body = Body;
+
   static Footer = Footer;
 
   state = {
@@ -54,9 +57,9 @@ class Card extends Component {
 
   toggleBodyAndFooter = () =>
     this.setState(
-      {
-        showBodyAndFooter: !this.state.showBodyAndFooter,
-      },
+      state => ({
+        showBodyAndFooter: !state.showBodyAndFooter,
+      }),
       this.props.onToggle
     );
 

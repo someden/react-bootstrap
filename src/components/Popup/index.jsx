@@ -5,7 +5,7 @@ import './index.css';
 
 const Popup = ({ closeButtonTitle, className, onClose, children, ...props }) => (
   <div className='popup text-body'>
-    <button className='popup-close-bg' onClick={onClose} title={closeButtonTitle} />
+    <button title={closeButtonTitle} type='button' className='popup-close-bg' onClick={onClose} />
     <div className='popup-content'>
       <div className={`popup-body ${className}`} {...props}>
         {children}

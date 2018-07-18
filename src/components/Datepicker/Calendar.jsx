@@ -94,33 +94,33 @@ class Calendar extends Component {
 
   handleNextMonth = () => {
     if (this.isAvailableNext()) {
-      this.setState({
-        date: this.state.date.clone().add(1, 'months'),
-      });
+      this.setState(state => ({
+        date: state.date.clone().add(1, 'months'),
+      }));
     }
   };
 
   handlePrevMonth = () => {
     if (this.isAvailablePrev()) {
-      this.setState({
-        date: this.state.date.clone().add(-1, 'months'),
-      });
+      this.setState(state => ({
+        date: state.date.clone().add(-1, 'months'),
+      }));
     }
   };
 
   handleNextYear = () => {
     if (this.isAvailableNext()) {
-      this.setState({
-        date: this.state.date.clone().add(1, 'years'),
-      });
+      this.setState(state => ({
+        date: state.date.clone().add(1, 'years'),
+      }));
     }
   };
 
   handlePrevYear = () => {
     if (this.isAvailablePrev()) {
-      this.setState({
-        date: this.state.date.clone().add(-1, 'years'),
-      });
+      this.setState(state => ({
+        date: state.date.clone().add(-1, 'years'),
+      }));
     }
   };
 
@@ -370,7 +370,8 @@ class Calendar extends Component {
   renderView = (type) => {
     if (type === VIEWTYPE.YEARS) {
       return this.renderYears();
-    } else if (type === VIEWTYPE.MONTHS) {
+    }
+    if (type === VIEWTYPE.MONTHS) {
       return this.renderMonths();
     }
     return this.renderDays();

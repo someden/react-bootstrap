@@ -31,12 +31,7 @@ class ButtonWithDropdown extends Component {
   };
 
   toggleDropdown = () =>
-    this.setState(
-      {
-        showDropdown: !this.state.showDropdown,
-      },
-      this.toggleEventListener
-    );
+    this.setState(state => ({ showDropdown: !state.showDropdown }), this.toggleEventListener);
 
   toggleEventListener = () =>
     (this.state.showDropdown
