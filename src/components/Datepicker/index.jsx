@@ -7,6 +7,10 @@ import Calendar from './Calendar';
 import sizes from '../../utils/sizes';
 import { getMoment, getValidDateString, dateSanitizer } from '../../utils/date';
 
+const keyCodes = {
+  TAB: 9,
+};
+
 class Datepicker extends Component {
   static propTypes = {
     id: PropTypes.string,
@@ -62,6 +66,23 @@ class Datepicker extends Component {
   setInputValue = (date = this.props.date) =>
     this.setState({ inputValue: getValidDateString({ ...this.props, date }) });
 
+  handleShowCalendar = () => this.setState({ isShowCalendar: true }, this.addEventsListeners);
+
+  handleCloseAndBlur = () => {
+    this.removeEventsListeners();
+    this.setState({ isShowCalendar: false }, this.handleBlur);
+  };
+
+  addEventsListeners = () => {
+    document.addEventListener('click', this.handleClick);
+    document.addEventListener('keydown', this.handleKeyDown);
+  };
+
+  removeEventsListeners = () => {
+    document.removeEventListener('click', this.handleClick);
+    document.removeEventListener('keydown', this.handleKeyDown);
+  };
+
   handleClick = (e) => {
     if (this.isClickOutside(e)) {
       this.handleCloseAndBlur();
@@ -70,14 +91,10 @@ class Datepicker extends Component {
 
   isClickOutside = e => this.datepicker && this.datepicker.compareDocumentPosition(e.target) < 16;
 
-  handleShowCalendar = () =>
-    this.setState({ isShowCalendar: true }, () =>
-      document.addEventListener('click', this.handleClick)
-    );
-
-  handleCloseAndBlur = () => {
-    document.removeEventListener('click', this.handleClick);
-    this.setState({ isShowCalendar: false }, this.handleBlur);
+  handleKeyDown = (e) => {
+    if (e.keyCode === keyCodes.TAB) {
+      this.handleCloseAndBlur();
+    }
   };
 
   handleChangeInput = (e) => {
@@ -102,6 +119,16 @@ class Datepicker extends Component {
       },
     });
 
+  setDatepickerRef = (ref) => {
+    this.datepicker = ref;
+  };
+
+  setDatepickerInputRef = (ref) => {
+    this.datepickerInput = ref;
+  };
+
+  focus = () => this.datepickerInput.focus();
+
   render() {
     const {
       id,
@@ -124,15 +151,11 @@ class Datepicker extends Component {
     const { inputValue, isShowCalendar } = this.state;
 
     return (
-      <div
-        className={`position-relative ${className}`}
-        ref={(ref) => {
-          this.datepicker = ref;
-        }}
-      >
+      <div className={`position-relative ${className}`} ref={this.setDatepickerRef}>
         <div className='input-group'>
           <input
             {...props}
+            ref={this.setDatepickerInputRef}
             id={id}
             name={name}
             type={type}
@@ -147,6 +170,7 @@ class Datepicker extends Component {
             {inputValue ? (
               <button
                 type='button'
+                tabIndex={-1}
                 disabled={disabled}
                 className='btn btn-secondary'
                 onClick={this.handleClearInput}
@@ -156,9 +180,10 @@ class Datepicker extends Component {
             ) : (
               <button
                 type='button'
+                tabIndex={-1}
                 disabled={disabled}
                 className='btn btn-secondary'
-                onClick={this.handleShowCalendar}
+                onClick={this.focus}
               >
                 <i className='fa fa-fw fa-calendar' />
               </button>
