@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-  - 9
+  - 11
 script:
-  - yarn run build
-  - yarn run build-storybook
+  - yarn build
+  - yarn build-storybook
 deploy:
   - provider: pages
     skip_cleanup: true

@@ -40,41 +40,40 @@
     "lint": "eslint --ext .js,.jsx src/ stories/ --fix",
     "deploy": "gh-pages -b build -d . -s '{package.json,es/**,lib/**}'",
     "build-storybook": "build-storybook -c stories -o build/storybook",
-    "deploy-storybook": "gh-pages -d build/storybook",
-    "precommit": "lint-staged"
+    "deploy-storybook": "gh-pages -d build/storybook"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "moment": "^2.22.2",
-    "popper.js": "^1.14.4",
+    "moment": "^2.23.0",
+    "popper.js": "^1.14.6",
     "prop-types": "^15.6.2",
     "react-autocomplete": "^1.8.1",
-    "react-style-proptype": "^3.2.1"
+    "react-style-proptype": "^3.2.2"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.4.10",
-    "@storybook/addon-info": "^3.4.10",
-    "@storybook/addon-options": "^3.4.10",
-    "@storybook/react": "^3.4.10",
-    "@types/prop-types": "^15.5.4",
-    "@types/react": "^16.4.7",
-    "@types/react-dom": "^16.0.6",
-    "babel-eslint": "^8.2.6",
-    "eslint": "^5.2.0",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "gh-pages": "^1.2.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.0",
+    "@storybook/addon-actions": "^3.4.11",
+    "@storybook/addon-info": "^3.4.11",
+    "@storybook/addon-options": "^3.4.11",
+    "@storybook/react": "^3.4.11",
+    "@types/prop-types": "^15.5.8",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "gh-pages": "^2.0.1",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
     "nwb": "^0.23.0",
-    "prettier": "^1.14.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "prettier": "^1.15.3",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
   },
   "peerDependencies": {
     "react": "^16.4.0",
@@ -154,6 +153,11 @@
     "singleQuote": true,
     "bracketSpacing": true,
     "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "{src,stories}/**/*.{js,jsx}": [
