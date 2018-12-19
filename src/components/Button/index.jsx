@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import Group from './Group';
-
 import buttonColors from '../../utils/buttonColors';
+import createComponent from '../../utils/createComponent';
 import sizes from '../../utils/sizes';
+
+const Group = createComponent('Button.Group', 'btn-group');
 
 class Button extends Component {
   static propTypes = {
@@ -15,9 +16,7 @@ class Button extends Component {
     outline: PropTypes.bool,
     color: PropTypes.oneOf(buttonColors),
     size: PropTypes.oneOf(sizes),
-    className: PropTypes.string,
     innerRef: PropTypes.func,
-    children: PropTypes.node,
   };
 
   static defaultProps = {
@@ -27,35 +26,22 @@ class Button extends Component {
     outline: false,
     color: 'primary',
     size: 'md',
-    className: '',
     innerRef: null,
-    children: null,
   };
 
   static Group = Group;
 
   render() {
-    const {
-      tag,
-      type,
-      active,
-      outline,
-      color,
-      size,
-      className,
-      innerRef,
-      children,
-      ...props
-    } = this.props;
+    const { tag, type, active, outline, color, size, innerRef, ...props } = this.props;
 
     const Tag = props.href && tag === 'button' ? 'a' : tag;
 
-    const classNames = cn(
+    const className = cn(
       'btn',
       `btn-${size}`,
       `btn${outline ? '-outline' : ''}-${color}`,
       { active, disabled: props.disabled },
-      className
+      props.className
     );
 
     return (
@@ -63,10 +49,8 @@ class Button extends Component {
         {...props}
         type={Tag === 'button' ? type : undefined}
         ref={typeof innerRef === 'function' ? innerRef : undefined}
-        className={classNames}
-      >
-        {children}
-      </Tag>
+        className={className}
+      />
     );
   }
 }

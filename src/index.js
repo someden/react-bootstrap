@@ -3,6 +3,7 @@ import ButtonWithConfirm from './components/ButtonWithConfirm';
 import ButtonWithDropdown from './components/ButtonWithDropdown';
 import ButtonWithLoader from './components/ButtonWithLoader';
 import ButtonWithUploader from './components/ButtonWithUploader';
+import Calendar from './components/Calendar';
 import Card from './components/Card';
 import CardWithTabs from './components/CardWithTabs';
 import Datepicker from './components/Datepicker';
@@ -17,6 +18,7 @@ import PopupWithCard from './components/PopupWithCard';
 import Select from './components/Select';
 import Spinner from './components/Spinner';
 import Tabs from './components/Tabs';
+import Textarea from './components/Textarea';
 import Tooltip from './components/Tooltip';
 
 export {
@@ -25,6 +27,7 @@ export {
   ButtonWithDropdown,
   ButtonWithLoader,
   ButtonWithUploader,
+  Calendar,
   Card,
   CardWithTabs,
   Datepicker,
@@ -39,5 +42,6 @@ export {
   Select,
   Spinner,
   Tabs,
+  Textarea,
   Tooltip,
 };

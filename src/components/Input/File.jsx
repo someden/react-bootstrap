@@ -47,4 +47,6 @@ File.defaultProps = {
   children: null,
 };
 
+File.displayName = 'Input.File';
+
 export default File;

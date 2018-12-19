@@ -8,15 +8,7 @@ import Popup from '../Popup';
 
 import colors from '../../utils/colors';
 
-const PopupWithCard = ({
-  color,
-  title,
-  controls,
-  closeButtonTitle,
-  onClose,
-  children,
-  ...props
-}) => (
+const PopupWithCard = ({ color, title, controls, closeButtonTitle, onClose, ...props }) => (
   <Popup closeButtonTitle={closeButtonTitle} onClose={onClose}>
     <Card
       color={color}
@@ -38,9 +30,7 @@ const PopupWithCard = ({
         ) : null
       }
       {...props}
-    >
-      {children}
-    </Card>
+    />
   </Popup>
 );
 
@@ -50,7 +40,6 @@ PopupWithCard.propTypes = {
   controls: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   closeButtonTitle: PropTypes.string,
   onClose: PropTypes.func,
-  children: PropTypes.node,
 };
 
 PopupWithCard.defaultProps = {
@@ -59,7 +48,6 @@ PopupWithCard.defaultProps = {
   controls: null,
   closeButtonTitle: 'Close',
   onClose: () => {},
-  children: null,
 };
 
 export default PopupWithCard;

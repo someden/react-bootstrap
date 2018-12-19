@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import Calendar from './Calendar';
+import Calendar from '../Calendar';
 
 import sizes from '../../utils/sizes';
 import { getMoment, getValidDateString, dateSanitizer } from '../../utils/date';
@@ -206,7 +206,5 @@ class Datepicker extends Component {
     );
   }
 }
-
-Datepicker.Calendar = Calendar;
 
 export default Datepicker;

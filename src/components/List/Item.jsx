@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
+import colors from '../../utils/colors';
+
 import Button from '../Button';
 import Icon from '../Icon';
-
-import colors from '../../utils/colors';
 
 // Class based component instead stateless functional, because refs needed.
 // eslint-disable-next-line react/prefer-stateless-function
@@ -16,7 +16,6 @@ class Item extends Component {
     active: PropTypes.bool,
     clickable: PropTypes.bool,
     disabled: PropTypes.bool,
-    className: PropTypes.string,
     onClick: PropTypes.func,
     onToggle: PropTypes.func,
     toggleIconName: PropTypes.string,
@@ -30,13 +29,14 @@ class Item extends Component {
     active: false,
     clickable: false,
     disabled: false,
-    className: '',
     onClick: null,
     onToggle: null,
     toggleIconName: 'plus',
     innerRef: null,
     children: null,
   };
+
+  static displayName = 'List.Item';
 
   render() {
     const {
@@ -45,7 +45,6 @@ class Item extends Component {
       active,
       clickable,
       disabled,
-      className,
       onClick,
       onToggle,
       toggleIconName,
@@ -68,7 +67,7 @@ class Item extends Component {
             active,
             disabled,
           },
-          className
+          props.className
         )}
       >
         {typeof onToggle === 'function' ? (

@@ -29,15 +29,15 @@ class Loader extends Component {
 
   isUnmounted = false;
 
-  componentWillMount() {
+  componentDidMount() {
     if (this.props.load) {
-      this.handleLoad(this.props.onLoad, this.props.onLoaded);
+      this.load();
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.state.loading && nextProps.reload) {
-      this.handleLoad(nextProps.onLoad, nextProps.onLoaded);
+  componentDidUpdate() {
+    if (!this.state.loading && this.props.reload) {
+      this.load();
     }
   }
 
@@ -45,11 +45,11 @@ class Loader extends Component {
     this.isUnmounted = true;
   }
 
-  handleLoad = (onLoad, onLoaded) =>
+  load = () =>
     this.beforeLoading()
-      .then(() => !this.isUnmounted && onLoad())
+      .then(() => !this.isUnmounted && this.props.onLoad())
       .then(res => !this.isUnmounted && this.afterLoading(res))
-      .then(res => !this.isUnmounted && onLoaded(res))
+      .then(res => !this.isUnmounted && this.props.onLoaded(res))
       .catch((error) => {
         if (!this.isUnmounted) {
           this.setState({ loading: false, error });

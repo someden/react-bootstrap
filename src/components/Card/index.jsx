@@ -5,14 +5,17 @@ import cn from 'classnames';
 import Button from '../Button';
 import Icon from '../Icon';
 
-import Container from './Container';
-import Header from './Header';
-import Body from './Body';
-import Footer from './Footer';
-
 import colors from '../../utils/colors';
+import createComponent from '../../utils/createComponent';
 
 import './index.css';
+
+const Container = createComponent('Card.Container', 'card');
+const Header = createComponent('Card.Header', 'card-header');
+const HeaderInner = createComponent('Card.HeaderInner', 'card-header-inner');
+const HeaderTitle = createComponent('Card.HeaderTitle', 'card-header-title');
+const Body = createComponent('Card.Body', 'card-body');
+const Footer = createComponent('Card.Footer', 'card-footer');
 
 class Card extends Component {
   static propTypes = {
@@ -25,7 +28,6 @@ class Card extends Component {
     customBody: PropTypes.bool,
     footer: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     fullHeight: PropTypes.bool,
-    className: PropTypes.string,
     children: PropTypes.node,
   };
 
@@ -39,13 +41,16 @@ class Card extends Component {
     customBody: false,
     footer: null,
     fullHeight: false,
-    className: '',
     children: null,
   };
 
   static Container = Container;
 
   static Header = Header;
+
+  static HeaderInner = HeaderInner;
+
+  static HeaderTitle = HeaderTitle;
 
   static Body = Body;
 
@@ -73,29 +78,33 @@ class Card extends Component {
       customBody,
       footer,
       fullHeight,
-      className,
       children,
       ...props
     } = this.props;
 
     const showBodyAndFooter = closed === null ? this.state.showBodyAndFooter : !closed;
+    const containerClassName = cn(
+      {
+        'card-on-full-height': fullHeight,
+        [`bg-${color}`]: color,
+        'text-white': color && color !== 'light' && color !== 'warning',
+      },
+      props.className
+    );
+    const bodyClassName = cn({
+      'd-none': !showBodyAndFooter,
+      'card-body-on-full-height': fullHeight,
+      'rounded-top': fullHeight && !(title || controls),
+      'rounded-bottom': fullHeight && !footer,
+    });
+    const footerClassName = cn({ 'd-none': !showBodyAndFooter });
 
     return (
-      <Container
-        {...props}
-        className={cn(
-          {
-            'card-on-full-height': fullHeight,
-            [`bg-${color}`]: color,
-            'text-white': color && color !== 'light' && color !== 'warning',
-          },
-          className
-        )}
-      >
+      <Container {...props} className={containerClassName}>
         {title || controls ? (
-          <Header>
-            <div className='card-header-inner'>
-              {typeof title === 'string' ? <div className='card-header-title'>{title}</div> : title}
+          <Card.Header>
+            <HeaderInner>
+              {typeof title === 'string' ? <HeaderTitle>{title}</HeaderTitle> : title}
               {typeof controls === 'string' ? <div>{controls}</div> : controls}
               {collapsible && !fullHeight ? (
                 <Button
@@ -106,23 +115,17 @@ class Card extends Component {
                   <Icon name={`chevron-${showBodyAndFooter ? 'down' : 'up'}`} />
                 </Button>
               ) : null}
-            </div>
-          </Header>
+            </HeaderInner>
+          </Card.Header>
         ) : null}
 
-        <Body
-          custom={customBody}
-          className={cn({
-            'd-none': !showBodyAndFooter,
-            'card-body-on-full-height': fullHeight,
-            'rounded-top': fullHeight && !(title || controls),
-            'rounded-bottom': fullHeight && !footer,
-          })}
-        >
-          {children}
-        </Body>
+        {customBody ? (
+          <div className={bodyClassName}>{children}</div>
+        ) : (
+          <Card.Body className={bodyClassName}>{children}</Card.Body>
+        )}
 
-        {footer ? <Footer className={cn({ 'd-none': !showBodyAndFooter })}>{footer}</Footer> : null}
+        {footer ? <Card.Footer className={footerClassName}>{footer}</Card.Footer> : null}
       </Container>
     );
   }

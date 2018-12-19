@@ -14,7 +14,9 @@ storiesOf('Form', module).add('Simple form', () => (
           <Form.Group>
             <Form.Label>Email address</Form.Label>
             <Input placeholder='Enter email' onChange={action('onChange Input')} />
-            <Form.Text>We will never share your email with anyone else.</Form.Text>
+            <Form.Text className='small text-muted'>
+              We will never share your email with anyone else.
+            </Form.Text>
           </Form.Group>
           <Form.Group>
             <Form.Label>Password</Form.Label>

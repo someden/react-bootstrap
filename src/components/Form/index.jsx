@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Label from './Label';
-import Group from './Group';
-import Text from './Text';
+import createComponent from '../../utils/createComponent';
+
+const Group = createComponent('Form.Group', 'form-group');
+// eslint-disable-next-line
+const Label = props => <label {...props} />;
+const Text = createComponent('Form.Text', 'form-text');
 
 class Form extends Component {
   static propTypes = {
     onSubmit: PropTypes.func,
-    children: PropTypes.node,
   };
 
   static defaultProps = {
     onSubmit: () => {},
-    children: null,
   };
 
-  static Label = Label;
-
   static Group = Group;
+
+  static Label = Label;
 
   static Text = Text;
 
@@ -28,13 +29,9 @@ class Form extends Component {
   };
 
   render() {
-    const { onSubmit, children, ...props } = this.props;
+    const { onSubmit, ...props } = this.props;
 
-    return (
-      <form {...props} onSubmit={this.handleSubmit}>
-        {children}
-      </form>
-    );
+    return <form onSubmit={this.handleSubmit} {...props} />;
   }
 }
 

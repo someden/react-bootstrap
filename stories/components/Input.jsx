@@ -4,8 +4,9 @@ import { action } from '@storybook/addon-actions';
 
 import Button from '../../src/components/Button';
 import Form from '../../src/components/Form';
-import Input from '../../src/components/Input';
 import Icon from '../../src/components/Icon';
+import Input from '../../src/components/Input';
+import Textarea from '../../src/components/Textarea';
 
 import colors from '../../src/utils/colors';
 import sizes from '../../src/utils/sizes';
@@ -148,32 +149,33 @@ storiesOf('Input', module)
     <div className='row'>
       <div className='col'>
         <Input.Group>
-          <div className='input-group-prepend'>
-            <span className='input-group-text'>@</span>
-          </div>
+          <Input.GroupPrepend>
+            <Input.GroupText>@</Input.GroupText>
+          </Input.GroupPrepend>
           <Input id='username' placeholder='Username' onChange={action('onChange')} />
         </Input.Group>
       </div>
       <div className='col'>
         <Input.Group>
-          <div className='input-group-prepend'>
-            <span className='input-group-text'>$</span>
-          </div>
+          <Input.GroupPrepend>
+            <Input.GroupText>$</Input.GroupText>
+          </Input.GroupPrepend>
           <Input onChange={action('onChange')} />
-          <div className='input-group-append'>
-            <span className='input-group-text'>.00</span>
-          </div>
+          <Input.GroupAppend>
+            <Input.GroupText>.00</Input.GroupText>
+          </Input.GroupAppend>
         </Input.Group>
       </div>
       <div className='col'>
         <Input.Group>
           <Input placeholder='Search...' onChange={action('onChange')} />
-          <span className='input-group-append'>
+          <Input.GroupAppend>
             <Button>
               <Icon name='search' />
             </Button>
-          </span>
+          </Input.GroupAppend>
         </Input.Group>
       </div>
     </div>
-  ));
+  ))
+  .add('Textarea', () => <Textarea />);

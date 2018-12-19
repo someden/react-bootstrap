@@ -36,4 +36,6 @@ AutocompleteWrap.defaultProps = {
   innerRef: null,
 };
 
+AutocompleteWrap.displayName = 'Input.Autocomplete';
+
 export default AutocompleteWrap;

@@ -15,7 +15,11 @@ storiesOf('List', module).add('List', () => (
     <div className='row mb-5'>
       <div className='col'>
         <h3 className='mb-4'>Default List</h3>
-        <List>{list.map(item => <List.Item key={item}>{item}</List.Item>)}</List>
+        <List>
+          {list.map(item => (
+            <List.Item key={item}>{item}</List.Item>
+          ))}
+        </List>
       </div>
       <div className='col'>
         <h3 className='mb-4'>Colors</h3>

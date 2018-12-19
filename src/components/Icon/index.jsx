@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import iconSizes from '../../utils/iconSizes';
 
-const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, className, ...props }) => (
+const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, ...props }) => (
   <i
     {...props}
     className={cn(
@@ -17,7 +17,7 @@ const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, className, ...props
         [`fa-${size}`]: size,
         [`fa-rotate-${rotate}`]: rotate,
       },
-      className
+      props.className
     )}
   />
 );
@@ -29,7 +29,6 @@ Icon.propTypes = {
   fixedWidth: PropTypes.bool,
   spin: PropTypes.bool,
   pulse: PropTypes.bool,
-  className: PropTypes.string,
 };
 
 Icon.defaultProps = {
@@ -39,7 +38,6 @@ Icon.defaultProps = {
   fixedWidth: false,
   spin: false,
   pulse: false,
-  className: '',
 };
 
 export default Icon;
