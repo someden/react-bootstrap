@@ -4,7 +4,6 @@
     "target": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "src"
+    "allowSyntheticDefaultImports": true
   }
 }
