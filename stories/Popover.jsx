@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Button from '../../src/components/Button';
-import Popover from '../../src/components/Popover';
+import { Button, Popover } from '../src';
 
 storiesOf('Popover', module).add('Popover', () => (
   <div className='p-5 text-center'>

@@ -1,58 +1,53 @@
-import React, { Component } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import buttonColors from '../../utils/buttonColors';
 import createComponent from '../../utils/createComponent';
+import buttonColors from '../../utils/buttonColors';
 import sizes from '../../utils/sizes';
 
-const Group = createComponent('Button.Group', 'btn-group');
+const Button = forwardRef(({ tag, type, active, outline, color, size, ...props }, ref) => {
+  const Tag = props.href && tag === 'button' ? 'a' : tag;
 
-class Button extends Component {
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    type: PropTypes.string,
-    active: PropTypes.bool,
-    outline: PropTypes.bool,
-    color: PropTypes.oneOf(buttonColors),
-    size: PropTypes.oneOf(sizes),
-    innerRef: PropTypes.func,
-  };
+  const className = cn(
+    'btn',
+    `btn-${size}`,
+    `btn${outline ? '-outline' : ''}-${color}`,
+    { active, disabled: props.disabled },
+    props.className
+  );
 
-  static defaultProps = {
-    tag: 'button',
-    type: 'button',
-    active: false,
-    outline: false,
-    color: 'primary',
-    size: 'md',
-    innerRef: null,
-  };
+  return <Tag ref={ref} {...props} {...(Tag === 'button' ? { type } : {})} className={className} />;
+});
 
-  static Group = Group;
+Button.displayName = 'Button';
 
-  render() {
-    const { tag, type, active, outline, color, size, innerRef, ...props } = this.props;
+Button.propTypes = {
+  active: PropTypes.bool,
+  className: PropTypes.string,
+  color: PropTypes.oneOf(buttonColors),
+  disabled: PropTypes.bool,
+  href: PropTypes.string,
+  outline: PropTypes.bool,
+  size: PropTypes.oneOf(sizes),
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  type: PropTypes.string,
+};
 
-    const Tag = props.href && tag === 'button' ? 'a' : tag;
+Button.defaultProps = {
+  active: false,
+  className: undefined,
+  color: 'primary',
+  disabled: false,
+  href: undefined,
+  outline: false,
+  size: 'md',
+  tag: 'button',
+  type: 'button',
+};
 
-    const className = cn(
-      'btn',
-      `btn-${size}`,
-      `btn${outline ? '-outline' : ''}-${color}`,
-      { active, disabled: props.disabled },
-      props.className
-    );
+Button.Group = createComponent('Button.Group', 'btn-group');
 
-    return (
-      <Tag
-        {...props}
-        type={Tag === 'button' ? type : undefined}
-        ref={typeof innerRef === 'function' ? innerRef : undefined}
-        className={className}
-      />
-    );
-  }
-}
+Button.Toolbar = createComponent('Button.Toolbar', 'btn-toolbar');
 
 export default Button;

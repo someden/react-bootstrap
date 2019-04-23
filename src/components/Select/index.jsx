@@ -1,49 +1,41 @@
-import React, { Component } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 import sizes from '../../utils/sizes';
 
-class Select extends Component {
-  static propTypes = {
-    items: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        disabled: PropTypes.bool,
-      })
-    ),
-    size: PropTypes.oneOf(sizes),
-    className: PropTypes.string,
-    innerRef: PropTypes.func,
-    children: PropTypes.node,
-  };
+const Select = forwardRef(({ items, size, className, children, ...props }, ref) => (
+  <select ref={ref} {...props} className={cn('custom-select', `form-control-${size}`, className)}>
+    {children ||
+      items.map(({ id = '', value = '', name = '', disabled = false }, index) => (
+        <option key={index} value={id || value} disabled={disabled}>
+          {name}
+        </option>
+      ))}
+  </select>
+));
 
-  static defaultProps = {
-    items: [],
-    size: 'md',
-    className: '',
-    innerRef: null,
-    children: null,
-  };
+Select.displayName = 'Select';
 
-  render() {
-    const { items, size, className, innerRef, children, ...props } = this.props;
-    return (
-      <select
-        {...props}
-        ref={typeof innerRef === 'function' ? innerRef : undefined}
-        className={`custom-select form-control-${size} ${className}`}
-      >
-        {children ||
-          items.map(({ id = '', value = '', name = '', disabled = false }, index) => (
-            <option key={index} value={id || value} disabled={disabled}>
-              {name}
-            </option>
-          ))}
-      </select>
-    );
-  }
-}
+Select.propTypes = {
+  children: PropTypes.node,
+  className: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      disabled: PropTypes.bool,
+    })
+  ),
+  size: PropTypes.oneOf(sizes),
+};
+
+Select.defaultProps = {
+  children: null,
+  className: undefined,
+  items: [],
+  size: 'md',
+};
 
 export default Select;

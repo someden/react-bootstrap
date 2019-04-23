@@ -19,7 +19,7 @@ const Footer = createComponent('Card.Footer', 'card-footer');
 
 class Card extends Component {
   static propTypes = {
-    color: PropTypes.oneOf([...colors, '']),
+    color: PropTypes.oneOf(colors),
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     controls: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     collapsible: PropTypes.bool,
@@ -32,7 +32,7 @@ class Card extends Component {
   };
 
   static defaultProps = {
-    color: '',
+    color: undefined,
     title: null,
     controls: null,
     collapsible: true,

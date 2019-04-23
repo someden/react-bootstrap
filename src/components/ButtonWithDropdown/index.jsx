@@ -15,7 +15,7 @@ class ButtonWithDropdown extends Component {
 
   static defaultProps = {
     dropdown: null,
-    className: '',
+    className: undefined,
     onClick: () => {},
     onToggle: () => {},
     children: null,

@@ -2,12 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button from '../../src/components/Button';
-import Card from '../../src/components/Card';
-import Icon from '../../src/components/Icon';
-import List from '../../src/components/List';
+import { Button, Card, Icon, List } from '../src';
 
-import colors from '../../src/utils/colors';
+import colors from '../src/utils/colors';
 
 const renderList = () => (
   <List flush>
@@ -222,19 +219,19 @@ storiesOf('Card', module)
   .add('Custom content', () => (
     <div>
       <div className='row'>
-        <div className='col-md-6 col-xl-3 mb-5' style={{ height: '300px' }}>
+        <div className='col-md-6 col-xl-4 mb-5' style={{ height: '300px' }}>
           <Card customBody fullHeight>
             {renderList()}
           </Card>
         </div>
 
-        <div className='col-md-6 col-xl-3 mb-5' style={{ height: '300px' }}>
+        <div className='col-md-6 col-xl-4 mb-5' style={{ height: '300px' }}>
           <Card title='List instead body' customBody fullHeight>
             {renderList()}
           </Card>
         </div>
 
-        <div className='col-md-6 col-xl-3 mb-5' style={{ height: '300px' }}>
+        <div className='col-md-6 col-xl-4 mb-5' style={{ height: '300px' }}>
           <Card
             title='List instead body'
             className='mb-5'
@@ -255,7 +252,7 @@ storiesOf('Card', module)
           </Card>
         </div>
 
-        <div className='col-md-6 col-xl-3 mb-5'>
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card
             footer={
               <div>
@@ -303,13 +300,7 @@ storiesOf('Card', module)
           </Card>
         </div>
 
-        <div className='col-md-4 mb-5'>
-          <Card title='List instead body' customBody>
-            {renderList()}
-          </Card>
-        </div>
-
-        <div className='col-md-4 mb-5'>
+        <div className='col-md-6 col-xl-4 mb-5'>
           <Card title='Table instead body' customBody>
             <table className='table mb-0'>
               <thead>
@@ -344,7 +335,7 @@ storiesOf('Card', module)
           </Card>
         </div>
 
-        <div className='col-md-4 mb-5' style={{ height: '300px' }}>
+        <div className='col-md-6 col-xl-4 mb-5' style={{ height: '300px' }}>
           <Card title='Table instead body' customBody fullHeight>
             <table className='table mb-0'>
               <tbody>
@@ -412,6 +403,12 @@ storiesOf('Card', module)
             </table>
           </Card>
         </div>
+
+        <div className='col-md-6 col-xl-4 mb-5'>
+          <Card title='List instead body' customBody>
+            {renderList()}
+          </Card>
+        </div>
       </div>
     </div>
   ))
@@ -419,7 +416,7 @@ storiesOf('Card', module)
     <div>
       <div className='row'>
         {colors.map(color => (
-          <div key={color} className='col-md-6 col-md-4 col-lg-3 mb-5'>
+          <div key={color} className='col-md-6 col-xl-4 mb-5'>
             <Card color={color} title={color}>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus beatae eligendi
               culpa natus et consectetur aut consequuntur nobis, in debitis temporibus, iure dolorum

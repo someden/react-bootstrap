@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import iconSizes from '../../utils/iconSizes';
 
-const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, ...props }) => (
+const Icon = forwardRef(({ name, size, rotate, fixedWidth, spin, pulse, ...props }, ref) => (
   <i
+    ref={ref}
     {...props}
     className={cn(
       'fa',
@@ -20,24 +21,28 @@ const Icon = ({ name, size, rotate, fixedWidth, spin, pulse, ...props }) => (
       props.className
     )}
   />
-);
+));
+
+Icon.displayName = 'Icon';
 
 Icon.propTypes = {
-  name: PropTypes.string,
-  size: PropTypes.oneOf(iconSizes),
-  rotate: PropTypes.oneOf(['', '90', '180', '270']),
+  className: PropTypes.string,
   fixedWidth: PropTypes.bool,
-  spin: PropTypes.bool,
+  name: PropTypes.string,
   pulse: PropTypes.bool,
+  rotate: PropTypes.oneOf(['', '90', '180', '270']),
+  size: PropTypes.oneOf(iconSizes),
+  spin: PropTypes.bool,
 };
 
 Icon.defaultProps = {
-  name: 'question',
-  size: '',
-  rotate: '',
+  className: undefined,
   fixedWidth: false,
-  spin: false,
+  name: 'question',
   pulse: false,
+  rotate: '',
+  size: '',
+  spin: false,
 };
 
 export default Icon;

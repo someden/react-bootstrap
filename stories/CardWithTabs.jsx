@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Icon from '../../src/components/Icon';
-import CardWithTabs from '../../src/components/CardWithTabs';
+import { CardWithTabs, Icon } from '../src';
 
 const items = [
   {
@@ -27,12 +26,12 @@ const items = [
 
 storiesOf('Card with tabs', module).add('Card with tabs', () => (
   <div className='row'>
-    <div className='col'>
+    <div className='col-md-4 mb-5'>
       <CardWithTabs>
         <CardWithTabs.Item title={items[0].name}>{items[0].description}</CardWithTabs.Item>
       </CardWithTabs>
     </div>
-    <div className='col'>
+    <div className='col-md-4 mb-5'>
       <CardWithTabs>
         {items.map(({ name, description }) => (
           <CardWithTabs.Item key={name} title={name}>
@@ -41,7 +40,7 @@ storiesOf('Card with tabs', module).add('Card with tabs', () => (
         ))}
       </CardWithTabs>
     </div>
-    <div className='col'>
+    <div className='col-md-4 mb-5'>
       <CardWithTabs>
         {items.map(({ name, icon, description }) => (
           <CardWithTabs.Item key={name} title={<Icon name={icon} />}>

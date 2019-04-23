@@ -1,17 +1,11 @@
-import React, { Component } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import createComponent from '../../utils/createComponent';
 import sizes from '../../utils/sizes';
 
-import Autocomplete from './Autocomplete';
 import File from './File';
-
-const Group = createComponent('Input.Group', 'input-group');
-const GroupPrepend = createComponent('Input.GroupPrepend', 'input-group-prepend');
-const GroupAppend = createComponent('Input.GroupAppend', 'input-group-append');
-const GroupText = createComponent('Input.GroupText', 'input-group-text');
 
 const unstyledInputTypes = [
   'button',
@@ -25,45 +19,41 @@ const unstyledInputTypes = [
   'range',
 ];
 
-class Input extends Component {
-  static propTypes = {
-    type: PropTypes.string,
-    size: PropTypes.oneOf(sizes),
-    innerRef: PropTypes.func,
-  };
+const Input = forwardRef(({ size, ...props }, ref) => {
+  const className = !unstyledInputTypes.includes(props.type)
+    ? cn(
+        props.readOnly ? 'form-control-plaintext' : 'form-control',
+        `form-control-${size}`,
+        props.className
+      )
+    : '';
+  return <input ref={ref} {...props} {...(className ? { className } : {})} />;
+});
 
-  static defaultProps = {
-    type: 'text',
-    size: 'md',
-    innerRef: null,
-  };
+Input.displayName = 'Input';
 
-  static Autocomplete = Autocomplete;
+Input.propTypes = {
+  className: PropTypes.string,
+  readOnly: PropTypes.bool,
+  size: PropTypes.oneOf(sizes),
+  type: PropTypes.string,
+};
 
-  static File = File;
+Input.defaultProps = {
+  className: undefined,
+  readOnly: undefined,
+  size: 'md',
+  type: 'text',
+};
 
-  static Group = Group;
+Input.File = File;
 
-  static GroupPrepend = GroupPrepend;
+Input.Group = createComponent('Input.Group', 'input-group');
 
-  static GroupAppend = GroupAppend;
+Input.GroupPrepend = createComponent('Input.GroupPrepend', 'input-group-prepend');
 
-  static GroupText = GroupText;
+Input.GroupAppend = createComponent('Input.GroupAppend', 'input-group-append');
 
-  render() {
-    const { size, innerRef, ...props } = this.props;
-
-    return (
-      <input
-        {...props}
-        {...(typeof innerRef === 'function' ? { ref: innerRef } : {})}
-        className={cn(
-          !unstyledInputTypes.includes(props.type) && `form-control form-control-${size}`,
-          props.className
-        )}
-      />
-    );
-  }
-}
+Input.GroupText = createComponent('Input.GroupText', 'input-group-text');
 
 export default Input;

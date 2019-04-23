@@ -1,21 +1,21 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Spinner from '../../src/components/Spinner';
+import { Spinner } from '../src';
 
-import colors from '../../src/utils/colors';
+import colors from '../src/utils/colors';
 
 storiesOf('Spinner', module).add('Spinner', () => (
   <div>
     <div className='row'>
-      <div className='col'>
-        <h3 className='mb-4'>Default</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Default</h3>
         <div className='border' style={{ height: '300px' }}>
           <Spinner />
         </div>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Sizes</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Sizes</h3>
         <p>
           <Spinner inline size='' /> 1em
         </p>
@@ -35,8 +35,8 @@ storiesOf('Spinner', module).add('Spinner', () => (
           <Spinner inline size='5x' /> 5x
         </p>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Colors</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Colors</h3>
         <p>
           <Spinner inline /> default
         </p>
@@ -46,8 +46,8 @@ storiesOf('Spinner', module).add('Spinner', () => (
           </p>
         ))}
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Icons</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Icons</h3>
         <p>
           <Spinner inline iconName='refresh' /> refresh
         </p>

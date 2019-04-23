@@ -37,7 +37,7 @@
     "build": "nwb build-react-component --copy-files",
     "clean": "nwb clean-module && nwb clean-demo",
     "prettify": "prettier 'src/**/*.js' 'src/**/*.jsx' 'stories/**/*.js' 'stories/**/*.jsx' '.storybook/**/*.js' --write",
-    "lint": "eslint --ext .js,.jsx src/ stories/ .storybook/ --fix",
+    "lint": "eslint --ext .js,.jsx src/ stories/ .storybook/",
     "deploy": "gh-pages -b build -d . -s '{package.json,es/**,lib/**}'",
     "build-storybook": "build-storybook -o build/storybook",
     "deploy-storybook": "gh-pages -d build/storybook"
@@ -126,6 +126,7 @@
         "error",
         {
           "devDependencies": [
+            "**/.storybook/**/*.*",
             "**/stories/**/*.*"
           ]
         }

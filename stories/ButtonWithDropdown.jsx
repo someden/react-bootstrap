@@ -2,14 +2,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button from '../../src/components/Button';
-import ButtonWithDropdown from '../../src/components/ButtonWithDropdown';
+import { Button, ButtonWithDropdown } from '../src';
 
-import colors from '../../src/utils/colors';
+import colors from '../src/utils/colors';
 
 storiesOf('Button with dropdown', module).add('Button with dropdown', () => (
   <div>
-    <div className='mb-4'>
+    <div className='mb-5'>
       {colors.map(color => (
         <ButtonWithDropdown
           key={color}
@@ -30,7 +29,7 @@ storiesOf('Button with dropdown', module).add('Button with dropdown', () => (
         </ButtonWithDropdown>
       ))}
     </div>
-    <div className='mb-4'>
+    <div className='mb-5'>
       {colors.map(color => (
         <Button.Group key={color} className='mb-1 mr-1'>
           <Button color={color}>{color}</Button>
@@ -50,7 +49,7 @@ storiesOf('Button with dropdown', module).add('Button with dropdown', () => (
         </Button.Group>
       ))}
     </div>
-    <div className='mb-4'>
+    <div className='mb-5'>
       <ButtonWithDropdown
         onToggle={action('onToggle')}
         dropdown={toggleDropdown => (

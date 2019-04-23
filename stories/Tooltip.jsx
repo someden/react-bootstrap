@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Button from '../../src/components/Button';
-import Tooltip from '../../src/components/Tooltip';
+import { Button, Tooltip } from '../src';
 
 storiesOf('Tooltip', module).add('Tooltip', () => (
   <div className='p-5 text-center'>

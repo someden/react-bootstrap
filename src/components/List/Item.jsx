@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
@@ -7,39 +7,9 @@ import colors from '../../utils/colors';
 import Button from '../Button';
 import Icon from '../Icon';
 
-// Class based component instead stateless functional, because refs needed.
-// eslint-disable-next-line react/prefer-stateless-function
-class Item extends Component {
-  static propTypes = {
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    color: PropTypes.oneOf(['', ...colors]),
-    active: PropTypes.bool,
-    clickable: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onClick: PropTypes.func,
-    onToggle: PropTypes.func,
-    toggleIconName: PropTypes.string,
-    innerRef: PropTypes.func,
-    children: PropTypes.node,
-  };
-
-  static defaultProps = {
-    tag: 'li',
-    color: '',
-    active: false,
-    clickable: false,
-    disabled: false,
-    onClick: null,
-    onToggle: null,
-    toggleIconName: 'plus',
-    innerRef: null,
-    children: null,
-  };
-
-  static displayName = 'List.Item';
-
-  render() {
-    const {
+const Item = forwardRef(
+  (
+    {
       tag: Tag,
       color,
       active,
@@ -48,42 +18,68 @@ class Item extends Component {
       onClick,
       onToggle,
       toggleIconName,
-      innerRef,
       children,
       ...props
-    } = this.props;
+    },
+    ref
+  ) => (
+    <Tag
+      ref={ref}
+      {...(typeof onClick === 'function' ? { role: 'presentation', onClick } : {})}
+      {...props}
+      className={cn(
+        'list-group-item',
+        {
+          [`list-group-item-${color}`]: color,
+          'list-group-item-action': typeof onClick === 'function' || clickable,
+          toggled: typeof onToggle === 'function',
+          active,
+          disabled,
+        },
+        props.className
+      )}
+    >
+      {typeof onToggle === 'function' ? (
+        <Button
+          color={active ? 'primary' : 'link'}
+          disabled={disabled}
+          className='list-group-item-toggle'
+          onClick={onToggle}
+        >
+          <Icon name={toggleIconName} />
+        </Button>
+      ) : null}
+      {children}
+    </Tag>
+  )
+);
 
-    return (
-      <Tag
-        {...(typeof onClick === 'function' ? { role: 'presentation', onClick } : {})}
-        {...props}
-        ref={typeof innerRef === 'function' ? innerRef : undefined}
-        className={cn(
-          'list-group-item',
-          {
-            [`list-group-item-${color}`]: color,
-            'list-group-item-action': typeof onClick === 'function' || clickable,
-            toggled: typeof onToggle === 'function',
-            active,
-            disabled,
-          },
-          props.className
-        )}
-      >
-        {typeof onToggle === 'function' ? (
-          <Button
-            color={active ? 'primary' : 'link'}
-            disabled={disabled}
-            className='list-group-item-toggle'
-            onClick={onToggle}
-          >
-            <Icon name={toggleIconName} />
-          </Button>
-        ) : null}
-        {children}
-      </Tag>
-    );
-  }
-}
+Item.displayName = 'List.Item';
+
+Item.propTypes = {
+  active: PropTypes.bool,
+  children: PropTypes.node,
+  className: PropTypes.string,
+  clickable: PropTypes.bool,
+  color: PropTypes.oneOf(colors),
+  disabled: PropTypes.bool,
+  onClick: PropTypes.func,
+  onToggle: PropTypes.func,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  toggleIconName: PropTypes.string,
+};
+
+Item.defaultProps = {
+  active: false,
+  children: null,
+  className: undefined,
+  clickable: false,
+  color: undefined,
+  disabled: false,
+  onClick: null,
+  onToggle: null,
+  tag: 'li',
+  toggleIconName: 'plus',
+};
 
 export default Item;

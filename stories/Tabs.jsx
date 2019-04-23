@@ -1,8 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Icon from '../../src/components/Icon';
-import Tabs from '../../src/components/Tabs';
+import { Icon, Tabs } from '../src';
 
 const items = [
   {
@@ -27,14 +26,14 @@ const items = [
 
 storiesOf('Tabs', module).add('Tabs', () => (
   <div className='row'>
-    <div className='col'>
+    <div className='col-md-4 mb-5'>
       <Tabs>
         <Tabs.Item title={items[0].name} className='p-3 border border-top-0 rounded-bottom'>
           {items[0].description}
         </Tabs.Item>
       </Tabs>
     </div>
-    <div className='col'>
+    <div className='col-md-4 mb-5'>
       <Tabs>
         {items.map(({ name, description }) => (
           <Tabs.Item key={name} title={name} className='p-3 border border-top-0 rounded-bottom'>
@@ -43,7 +42,7 @@ storiesOf('Tabs', module).add('Tabs', () => (
         ))}
       </Tabs>
     </div>
-    <div className='col'>
+    <div className='col-md-4 mb-5'>
       <Tabs>
         {items.map(({ name, icon, description }) => (
           <Tabs.Item

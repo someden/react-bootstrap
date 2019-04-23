@@ -2,9 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Select from '../../src/components/Select';
+import { Select } from '../src';
 
-import sizes from '../../src/utils/sizes';
+import sizes from '../src/utils/sizes';
 
 const items = [
   { name: '0', value: 0 },
@@ -15,8 +15,8 @@ const items = [
 
 storiesOf('Select', module).add('Select', () => (
   <div className='row'>
-    <div className='col'>
-      <h3 className='mb-4'>Sizes</h3>
+    <div className='col-md-6 mb-5'>
+      <h3 className='mb-3'>Sizes</h3>
       {sizes.map(size => (
         <p key={size}>
           <Select
@@ -28,8 +28,8 @@ storiesOf('Select', module).add('Select', () => (
         </p>
       ))}
     </div>
-    <div className='col'>
-      <h3 className='mb-4'>Disabled</h3>
+    <div className='col-md-6 mb-5'>
+      <h3 className='mb-3'>Disabled</h3>
       <Select items={items} disabled onChange={action('onChange')} />
     </div>
   </div>

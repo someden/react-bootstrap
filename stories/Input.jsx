@@ -2,30 +2,26 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button from '../../src/components/Button';
-import Form from '../../src/components/Form';
-import Icon from '../../src/components/Icon';
-import Input from '../../src/components/Input';
-import Textarea from '../../src/components/Textarea';
+import { Button, Form, Icon, Input, Textarea } from '../src';
 
-import colors from '../../src/utils/colors';
-import sizes from '../../src/utils/sizes';
+import colors from '../src/utils/colors';
+import sizes from '../src/utils/sizes';
 
 const handleChangeInputFile = e => action('Add file')(e.target.files[0].name);
 
 storiesOf('Input', module)
   .add('Input', () => (
     <div className='row'>
-      <div className='col'>
-        <h3 className='mb-4'>Sizes</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>Sizes</h3>
         {sizes.map(size => (
           <p key={size}>
             <Input placeholder={size} size={size} onChange={action('onChange')} />
           </p>
         ))}
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Types</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>Types</h3>
         <p>
           <Input type='text' placeholder='Text Input' onChange={action('onChange')} />
         </p>
@@ -58,40 +54,24 @@ storiesOf('Input', module)
           </Form.Label>
         </p>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>States</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>States</h3>
         <p>
           <Input placeholder='Default Input' onChange={action('onChange')} />
         </p>
         <p>
           <Input placeholder='Disabled Input' disabled onChange={action('onChange')} />
         </p>
-      </div>
-    </div>
-  ))
-  .add('Autocomplete', () => (
-    <div className='row'>
-      <div className='col-4'>
-        <Form.Group>
-          <Form.Label htmlFor='autocomplete'>Autocomplete</Form.Label>
-          <Input.Autocomplete
-            items={[
-              { value: 1, name: 'apple' },
-              { value: 2, name: 'banana' },
-              { value: 3, name: 'pear' },
-            ]}
-            inputProps={{ id: 'autocomplete' }}
-            onChange={action('onChange Autocomplete')}
-            onSelect={action('onSelect Autocomplete')}
-          />
-        </Form.Group>
+        <p>
+          <Input placeholder='Readonly Input' readOnly onChange={action('onChange')} />
+        </p>
       </div>
     </div>
   ))
   .add('File', () => (
     <div className='row'>
-      <div className='col'>
-        <h3 className='mb-4'>Colors</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Colors</h3>
         {colors.map(color => (
           <p key={color}>
             <Input.File id={color} color={color} onChange={handleChangeInputFile}>
@@ -105,8 +85,8 @@ storiesOf('Input', module)
           </Input.File>
         </p>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Outline</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Outline</h3>
         {colors.map(color => (
           <p key={color}>
             <Input.File
@@ -120,8 +100,8 @@ storiesOf('Input', module)
           </p>
         ))}
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Sizes</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>Sizes</h3>
         {sizes.map(size => (
           <p key={size}>
             <Input.File id={size} size={size} onChange={handleChangeInputFile}>
@@ -130,8 +110,8 @@ storiesOf('Input', module)
           </p>
         ))}
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>States</h3>
+      <div className='col-md-3 mb-5'>
+        <h3 className='mb-3'>States</h3>
         <p>
           <Input.File id='default_state' onChange={handleChangeInputFile}>
             Default
@@ -147,7 +127,7 @@ storiesOf('Input', module)
   ))
   .add('Group', () => (
     <div className='row'>
-      <div className='col'>
+      <div className='col-md-4 mb-5'>
         <Input.Group>
           <Input.GroupPrepend>
             <Input.GroupText>@</Input.GroupText>
@@ -155,7 +135,7 @@ storiesOf('Input', module)
           <Input id='username' placeholder='Username' onChange={action('onChange')} />
         </Input.Group>
       </div>
-      <div className='col'>
+      <div className='col-md-4 mb-5'>
         <Input.Group>
           <Input.GroupPrepend>
             <Input.GroupText>$</Input.GroupText>
@@ -166,7 +146,7 @@ storiesOf('Input', module)
           </Input.GroupAppend>
         </Input.Group>
       </div>
-      <div className='col'>
+      <div className='col-md-4 mb-5'>
         <Input.Group>
           <Input placeholder='Search...' onChange={action('onChange')} />
           <Input.GroupAppend>

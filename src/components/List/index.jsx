@@ -1,27 +1,29 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import Element from '../../utils/Element';
 import Item from './Item';
 
 import './index.css';
 
-const List = ({ flush, ...props }) => (
-  <Element
+const List = forwardRef(({ tag: Tag, flush, ...props }, ref) => (
+  <Tag
+    ref={ref}
     {...props}
     className={cn('list-group text-body', { 'list-group-flush': flush }, props.className)}
   />
-);
+));
 
 List.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  className: PropTypes.string,
   flush: PropTypes.bool,
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 List.defaultProps = {
-  tag: 'ul',
+  className: undefined,
   flush: false,
+  tag: 'ul',
 };
 
 List.Item = Item;

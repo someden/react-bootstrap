@@ -2,9 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button from '../../src/components/Button';
-import Form from '../../src/components/Form';
-import Input from '../../src/components/Input';
+import { Button, Form, Input } from '../src';
 
 storiesOf('Form', module).add('Simple form', () => (
   <div>

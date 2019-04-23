@@ -2,27 +2,25 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import Button from '../../src/components/Button';
-import Icon from '../../src/components/Icon';
-import List from '../../src/components/List';
+import { Button, Icon, List } from '../src';
 
-import colors from '../../src/utils/colors';
+import colors from '../src/utils/colors';
 
 const list = ['List Item 1', 'List Item 2', 'List Item 3', 'List Item 4', 'List Item 5'];
 
 storiesOf('List', module).add('List', () => (
   <div>
-    <div className='row mb-5'>
-      <div className='col'>
-        <h3 className='mb-4'>Default List</h3>
+    <div className='row'>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>Default List</h3>
         <List>
           {list.map(item => (
             <List.Item key={item}>{item}</List.Item>
           ))}
         </List>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Colors</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>Colors</h3>
         <List>
           <List.Item>default</List.Item>
           {colors.map(color => (
@@ -32,16 +30,16 @@ storiesOf('List', module).add('List', () => (
           ))}
         </List>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>States</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>States</h3>
         <List>
           <List.Item>Default</List.Item>
           <List.Item active>Active</List.Item>
           <List.Item disabled>Disabled</List.Item>
         </List>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>Custom List</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>Custom List</h3>
         <List>
           <List.Item className='border-light bg-light'>Custom List Item 1</List.Item>
           <List.Item className='border-white'>Custom List Item 2</List.Item>
@@ -53,10 +51,8 @@ storiesOf('List', module).add('List', () => (
           <List.Item className='border-white'>Custom List Item 8</List.Item>
         </List>
       </div>
-    </div>
-    <div className='row mb-5'>
-      <div className='col'>
-        <h3 className='mb-4'>List item with controls</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>List item with controls</h3>
         <List>
           {list.map(item => (
             <List.Item key={item}>
@@ -73,8 +69,8 @@ storiesOf('List', module).add('List', () => (
           ))}
         </List>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>List item with action</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>List item with action</h3>
         <List>
           {list.map(item => (
             <List.Item key={item} onClick={action('onClick List Item')}>
@@ -83,8 +79,8 @@ storiesOf('List', module).add('List', () => (
           ))}
         </List>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>List item with toggle</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>List item with toggle</h3>
         <List>
           {list.map(item => (
             <List.Item key={item} onToggle={action('onClick List Item Toggle')}>
@@ -97,8 +93,8 @@ storiesOf('List', module).add('List', () => (
           </List.Item>
         </List>
       </div>
-      <div className='col'>
-        <h3 className='mb-4'>List item with toggle</h3>
+      <div className='col-md-4 mb-5'>
+        <h3 className='mb-3'>List item with toggle</h3>
         <List>
           {list.map(item => (
             <List.Item key={item} onToggle={action('onClick List Item Toggle')}>
