@@ -30,7 +30,7 @@ Button.propTypes = {
   href: PropTypes.string,
   outline: PropTypes.bool,
   size: PropTypes.oneOf(sizes),
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.func, PropTypes.string]),
   type: PropTypes.string,
 };
 

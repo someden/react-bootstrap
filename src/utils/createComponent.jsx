@@ -11,7 +11,7 @@ const createComponent = (displayName, className) => {
 
   Component.propTypes = {
     className: PropTypes.string,
-    tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.func, PropTypes.string]),
   };
 
   Component.defaultProps = {

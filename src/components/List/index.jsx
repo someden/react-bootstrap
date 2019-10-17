@@ -17,7 +17,7 @@ const List = forwardRef(({ tag: Tag, flush, ...props }, ref) => (
 List.propTypes = {
   className: PropTypes.string,
   flush: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.func, PropTypes.string]),
 };
 
 List.defaultProps = {

@@ -65,7 +65,7 @@ Item.propTypes = {
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
   onToggle: PropTypes.func,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.func, PropTypes.string]),
   toggleIconName: PropTypes.string,
 };
 
