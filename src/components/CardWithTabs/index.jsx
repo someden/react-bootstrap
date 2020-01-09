@@ -39,10 +39,10 @@ class CardWithTabs extends Component {
       <Card.Container>
         <Card.Header>
           <Tabs.Nav className='card-header-tabs'>
-            {Children.map(children, ({ props: { title } }, index) => (
+            {Children.map(children, (item, index) => item && (
               <Tabs.NavItem
                 key={index}
-                title={title}
+                title={item.props.title}
                 active={selectedIndex === index}
                 onClick={() => this.onToggle(index)}
               />
@@ -51,7 +51,7 @@ class CardWithTabs extends Component {
         </Card.Header>
         <Card.Body>
           {Children.map(children, (item, index) =>
-            cloneElement(item, { key: index, active: selectedIndex === index })
+            item && cloneElement(item, { key: index, active: selectedIndex === index })
           )}
         </Card.Body>
       </Card.Container>
