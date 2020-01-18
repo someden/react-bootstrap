@@ -4,6 +4,7 @@ import PopperJS from 'popper.js';
 
 class Popper extends Component {
   static propTypes = {
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     placement: PropTypes.oneOf(['top', 'left', 'bottom', 'right']).isRequired,
     reference: PropTypes.instanceOf(Element).isRequired,
     onMouseEnter: PropTypes.func.isRequired,
@@ -75,7 +76,7 @@ class Popper extends Component {
   };
 
   render() {
-    const { onMouseEnter, onMouseLeave, children } = this.props;
+    const { onMouseEnter, onMouseLeave, title, children } = this.props;
     const { placement } = this.state;
 
     return (
@@ -87,6 +88,7 @@ class Popper extends Component {
         onMouseLeave={onMouseLeave}
       >
         <div ref={this.setArrowNode} className='arrow' />
+        {title ? <div className='popover-header'>{title}</div> : null}
         <div className='popover-body'>{children}</div>
       </div>
     );
