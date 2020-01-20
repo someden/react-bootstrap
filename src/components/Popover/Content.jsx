@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { Consumer } from './context';
 import Popper from './Popper';
 
-const Content = ({ children }) => (
+const Content = ({ title, children }) => (
   <Consumer>
     {({ placement, referenceNode, showContent, onMouseEnter, onMouseLeave }) =>
       (showContent ? (
         <Popper
+          title={title}
           placement={placement}
           reference={referenceNode}
           onMouseEnter={onMouseEnter}
@@ -22,6 +23,7 @@ const Content = ({ children }) => (
 );
 
 Content.propTypes = {
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   children: PropTypes.node.isRequired,
 };
 
